@@ -1,0 +1,35 @@
+
+<div class="output" [ngClass]="blur ? 'modal-blur' : 'init'">
+
+  <!-- { /* display current local weather info if data has been fetched from the weather API */ } -->
+  <div className='weather'>
+    <!-- {
+      (location) &&
+        <p>City: {location} | Current: {wxConditions} | Temp: {temperature} | Humidity: {wxHumidity}% | Pressure: {pressure}</p>
+    } -->
+  </div>
+
+  <!-- { /* display imperial or metric calculated value based on current state of 'units' */ } -->
+  <div className='output-value'>
+    <!-- {
+      (machNumber)
+        ? <p>Mach {machNumber}</p>
+        : <p>Mach #</p>
+    } -->
+  </div>
+
+  <!-- { /*
+    if local mach 1 has been calculated and weather info has been fetched, display local mach 1
+    if local mach 1 has not been calculated but tips speed has been calculated, display tip speed and 'enter location for local mach 1'
+  */ } -->
+  <div className='local-mach-1'>
+    <!-- {
+      (location !== '' || metersPerSecond !== 0) &&
+        <p>{units === 'imperial'
+          ? `Tip Speed: ${fpsTipSpeedString} | Local Mach 1: ${fpsLocalMach1String}`
+          : `Tip Speed: ${mpsTipSpeedString} | Local Mach 1: ${mpsLocalMach1String}`}
+        </p>
+    } -->
+  </div>
+
+</div>
