@@ -1,0 +1,220 @@
+@import '../../scss-variables';
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input:focus {
+  outline-style: none;
+  border-color: $main-magenta;
+  filter: $magenta-shadow;
+}
+
+button {
+  height: 50px;
+  width: 65%;
+  font-weight: bold;
+  color: $main-magenta;
+  background-color: $main-gray;
+  border: solid 2px $faded-magenta;
+  border-radius: 5px;
+  margin: 15px 0px 15px;
+  transition: ease-in-out 300ms;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+}
+
+label {
+  margin: 5px 0px 5px;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
+.input-form {
+  font-family: 'B612', sans-serif;
+  font-size: 0.75em;
+  width: 500px;
+  border-radius: 15px;
+  box-shadow: 0px 3px 10px black;
+  transition: 500ms;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  background-color: $deep-magenta;
+  border: solid 2px $faded-blue;
+  border-radius: 15px;
+}
+
+.units {
+  display: flex;
+  grid-column: 1 / 3;
+  background-color: $main-gray;
+  font-family: Arial;
+  font-size: 0.9em;
+  font-weight: bold;
+  justify-content: space-around;
+  border-bottom: solid 2px $faded-blue;
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+  transition: ease-in-out 300ms;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+
+  & .unitsLabel {
+    width: 37%;
+    background-color: $main-gray;
+    color: $faded-blue;
+    border: solid 2px $faded-magenta;
+    border-radius: 10px;
+    padding: 10px 10px;
+    margin: 20px 0px;
+    transition: color 300ms ease-in-out, background-color 300ms ease-in-out, filter 300ms ease-in-out, border-color 300ms ease-in-out;
+  }
+
+  & [type=radio] {
+    appearance: none;
+    position: absolute;
+  }
+
+  & #imperial:checked + label {
+    color: $main-gray;
+    background-color: $main-magenta;
+    border-color: $main-magenta;
+    filter: $magenta-shadow;
+  }
+
+  & #metric:checked + label {
+    color: $main-gray;
+    background-color: $main-magenta;
+    border-color: $main-magenta;
+    filter: $magenta-shadow;
+  }
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  grid-column: 1 / 2;
+  align-items: center;
+}
+
+.options {
+  background-color: $main-gray;
+  border-top: solid 2px $faded-blue;
+  border-left: solid 2px $faded-blue;
+  border-top-left-radius: 15px;
+  border-bottom-right-radius: 14px;
+  transition: ease-in-out 300ms;
+}
+
+.inputs-right, .options {
+  display: flex;
+  flex-direction: column;
+  grid-column: 2 / 3;
+  align-items: center;
+  justify-content: center;
+}
+
+.inputs, .inputs-right, .options {
+  font-size: 0.8em;
+}
+
+::placeholder {
+  color: $faded-blue;
+  font-size: 1em;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
+[type=number], [type=text] {
+  border: solid 2px $faded-magenta;
+  border-radius: 5px;
+  height: 2em;
+  width: 50%;
+  background-color: $main-gray;
+  color: $main-magenta;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: end;
+  padding-right: 30px;
+  margin-bottom: 10px;
+  transition: ease-in-out 300ms;
+}
+
+@media screen and (min-width: 540px) {
+  button:hover {
+    color: $main-gray;
+    background-color: $main-magenta;
+    border-color: $main-magenta;
+    filter: $magenta-shadow;
+  }
+
+  .input-form {
+    animation: slideInInputForm 1200ms ease-in-out forwards;
+  }
+
+  .unitsLabel {
+    cursor: pointer;
+  }
+
+  .unitsLabel:hover, [type=number]:hover, [type=text]:hover {
+    border-color: $main-magenta;
+  }
+
+  .units:hover, .options:hover {
+    background-color: $deep-blue;
+  }
+
+  @keyframes slideInInputForm {
+    0% {
+      transform: translateX(100vw);
+    }
+    100% {
+      transform: translateX(0vw);
+    }
+  }
+}
+
+@media screen and (max-width: 540px) {
+  button {
+    height: 30%;
+    cursor: default;
+  }
+
+  .unitsLabel {
+    cursor: default;
+  }
+
+  .input-form {
+    max-width: 95vw;
+  }
+  
+  .button {
+    height: 60px;
+    font-size: 1em;
+  }
+
+  .form {
+    font-size: 1.5em;
+  }
+
+  [type=number], [type=text] {
+    height: 1.2em;
+    width: 40%;
+  }
+}

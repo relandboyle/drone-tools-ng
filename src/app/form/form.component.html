@@ -1,0 +1,97 @@
+
+<div class="input-form">
+
+  <form class='form'>
+
+    <div class='units'>
+        <input
+          id="imperial"
+          type='radio'
+          name='units'
+          value='imperial'
+          >
+      <label class='unitsLabel' htmlFor='imperial'>
+        Imperial
+      </label>
+
+        <input
+          id="metric"
+          type='radio'
+          name='units'
+          value='metric'
+          checked='true'
+          >
+      <label class='unitsLabel' htmlFor='metric'>
+        Metric
+      </label>
+    </div>
+
+    <div class='inputs'>
+      <label>Prop Dia.</label>
+
+      <input
+        class='propDia'
+        placeholder='0'
+        type='number'
+        step='any'
+        inputMode='decimal'
+        >
+
+      <label>Batt Volts (V)</label>
+      <input
+        class='battV'
+        type='number'
+        inputMode='decimal'
+        step='any'
+        placeholder='0'
+        >
+
+      <label>Motor (kV)</label>
+      <input
+        class='motorKv'
+        type='number'
+        inputMode='decimal'
+        step='any'
+        placeholder='0'
+        >
+
+      <button type="submit" class='button'>PROP TIP SPEED</button>
+    </div>
+
+    <div class='right-side'>
+      <div class='inputs-right'>
+        <label>Airspeed</label>
+        <input
+          id='airspeed'
+          class='airspeedKnots'
+          type='number'
+          inputMode='decimal'
+          step='any'
+          placeholder='0'
+          >
+      </div>
+
+      <div class='options'>
+        <label>Altitude (ft)</label>
+        <input
+          class='altitude'
+          type='number'
+          inputMode='decimal'
+          step='any'
+          placeholder='0'
+          >
+
+        <label>City / Zip</label>
+        <input
+          type='text'
+          placeholder='0'
+          >
+
+        <button class='button'>
+        WEATHER
+        </button>
+      </div>
+    </div>
+
+  </form>
+</div>
