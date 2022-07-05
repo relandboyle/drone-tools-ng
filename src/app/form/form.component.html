@@ -1,5 +1,5 @@
 
-<div class="input-form">
+<div class="input-form" [ngClass]="blur ? 'modal-active' : 'init'">
 
   <form class='form'>
 
@@ -87,7 +87,7 @@
           placeholder='0'
           >
 
-        <button class='button'>
+        <button class='button' (click)="getWeather">
         WEATHER
         </button>
       </div>

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { WeatherService } from '../weather.service';
 
 @Component({
   selector: 'app-form',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormComponent implements OnInit {
 
-  constructor() { }
+  weather: any;
 
-  ngOnInit(): void {
-  }
+  @Input() blur = false;
+
+  constructor(private weatherService: WeatherService) { }
+
+  ngOnInit(): void { }
+
+  getWeather = this.weatherService.getWeather().subscribe(
+    (response) => { this.weather = response },
+    (error) => { console.log(error); }
+  )
 
 }

@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/6f6dff66-ad04-4a3f-92e1-de950d63eb5b/deploy-status)](https://app.netlify.com/sites/playful-tapioca-2cb0da/deploys)
+
 # DroneToolsNg
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.7.
