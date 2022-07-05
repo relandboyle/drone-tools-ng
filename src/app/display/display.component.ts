@@ -8,6 +8,15 @@ import { Component, Input, OnInit } from '@angular/core';
 export class DisplayComponent implements OnInit {
 
   @Input() blur = false;
+  @Input() location = '';
+  @Input() wxConditions = '';
+  @Input() wxHumidity = '';
+  @Input() temperature = '';
+  @Input() pressure = '';
+  @Input() units = '';
+  @Input() machNumber = '';
+  @Input() metersPerSecond = '';
+  @Input() weather = {};
 
   constructor() { }
 

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
@@ -20,6 +22,8 @@ import { HeaderComponent } from './header/header.component';
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
+    FormsModule,
+    HttpClientModule,
     MatDialogModule,
   ],
   providers: [],
