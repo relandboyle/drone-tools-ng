@@ -1,6 +1,8 @@
-@import '../../scss-variables';
+@import '../../_scss-variables';
 
 .header-wrapper {
+  display: flex;
+  flex-direction: column;
   width: 500px;
   border-left: solid 2px $faded-blue;
   border-right: solid 2px $faded-blue;
@@ -37,7 +39,7 @@
   -moz-user-select: none;
   -webkit-user-select: none;
 
-  & > p {
+  p {
     font-size: 1.5em;
     font-family: 'Exo', sans-serif;
     color: $main-blue;

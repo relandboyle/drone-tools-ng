@@ -29,6 +29,7 @@
     "strictTemplates": true
   },
   "include": [
+    "src/app/*",
     "src/environments/*"
   ]
 }
