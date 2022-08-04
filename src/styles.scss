@@ -1,10 +1,7 @@
-@import './scss-variables';
 
-* {
-  background-color: $main-gray;
+html, body { 
+  height: 100%;
 }
-
-html, body { height: 100%; }
 
 body {
   margin: 0;
@@ -16,6 +13,5 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }

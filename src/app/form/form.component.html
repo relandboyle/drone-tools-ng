@@ -84,12 +84,15 @@
         <label>City / Zip</label>
         <input
           type='text'
-          placeholder='0'
-          >
+          id="name"
+          name="zipcode"
+          placeholder="0"
+          [(ngModel)]="data"
+          />
 
-        <button class='button' (click)="getWeather">
-        WEATHER
-        </button>
+          <button class='button' (click)="getWeather()">
+            WEATHER
+          </button>
       </div>
     </div>
 

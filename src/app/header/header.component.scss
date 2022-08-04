@@ -1,4 +1,4 @@
-@import '../../_scss-variables';
+@import '../../style-variables';
 
 .header-wrapper {
   display: flex;
@@ -38,13 +38,13 @@
   user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
+}
 
-  p {
-    font-size: 1.5em;
-    font-family: 'Exo', sans-serif;
-    color: $main-blue;
-    filter: $blue-shadow;
-  }
+.header-title {
+  font-size: 1.5em;
+  font-family: 'Exo', sans-serif;
+  color: $main-blue;
+  filter: $blue-shadow;
 }
 
 .app-logo {
