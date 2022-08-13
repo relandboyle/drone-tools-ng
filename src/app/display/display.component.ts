@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
+import { FormInputs, WeatherConditions } from '../../models';
+
 @Component({
   selector: 'app-display',
   templateUrl: './display.component.html',
@@ -7,20 +9,14 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class DisplayComponent implements OnInit {
 
-  @Input() blur = false;
-  @Input() location = '';
-  @Input() wxConditions = '';
-  @Input() wxHumidity = '';
-  @Input() temperature = '';
-  @Input() pressure = '';
-  @Input() units = '';
-  @Input() machNumber = '';
-  @Input() metersPerSecond = '';
-  @Input() weather = {};
+  @Input() formInputs!: FormInputs;
+  @Input() weatherConditions!: WeatherConditions;
 
   constructor() { }
 
   ngOnInit(): void {
+
+    console.log(this.formInputs);
   }
 
 }
