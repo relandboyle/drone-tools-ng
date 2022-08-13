@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
 export class DisplayComponent implements OnInit {
   @Input() formInputs!: FormInputs;
   @Input() weatherConditions!: WeatherConditions;
+  @Input() blur!: boolean;
   cityZip: string = '';
   weatherKey: string = environment.apiKey;
 
@@ -22,7 +23,7 @@ export class DisplayComponent implements OnInit {
   ngOnInit(): void {
     this.weatherConditions.cityZip = '11225';
     this.cityZip = this.weatherConditions.cityZip;
-    console.log(this.weatherConditions);
+    // console.log(this.weatherConditions);
 
   }
 

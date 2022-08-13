@@ -10,11 +10,10 @@ import { AppData } from '../app-data';
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
-
+  @Input() blur!: boolean;
   weather: any;
   data: string = '';
 
-  @Input() blur = false;
 
   constructor(
     private weatherService: WeatherService,

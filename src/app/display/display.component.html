@@ -1,5 +1,5 @@
 
-<div class="outputs" [ngClass]="false ? 'modal-active' : 'init'">
+<div class="outputs" [ngClass]="blur ? 'modal-active' : 'init'">
 
   <!-- display current local weather info if data has been fetched from the weather API -->
   <div class='weather'>
@@ -25,4 +25,4 @@
 
 </div>
 
-<button (click)="getWeather()">GET WEATHER</button>
+<!-- <button (click)="getWeather()">GET WEATHER</button> -->

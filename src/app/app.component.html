@@ -1,9 +1,20 @@
 <div class="app">
-  <app-header></app-header>
+
+  <app-header
+    [blur]="blur"
+    >
+  </app-header>
+
   <app-display
     [formInputs]="inputs"
     [weatherConditions]="conditions"
+    [blur]="blur"
     >
   </app-display>
-  <app-form></app-form>
+
+  <app-form
+    [blur]="blur"
+    >
+  </app-form>
+  
 </div>
