@@ -12,13 +12,18 @@ export class FormComponent implements OnInit {
 
   @Input() blur = false;
 
-  constructor(private weatherService: WeatherService) { }
+  constructor(private wxService: WeatherService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.getWeather();
+  }
 
-  getWeather = this.weatherService.getWeather().subscribe(
-    (response) => { this.weather = response },
-    (error) => { console.log(error); }
-  )
+  getWeather() {
+    this.wxService.getWeather().subscribe({
+      next: res => this.weather = res,
+      error: err => console.error(err),
+      complete: () => console.log(this.weather)
+    });
+  }
 
 }
