@@ -27,6 +27,7 @@
     </div>
 
     <div class='inputs'>
+      
       <label>Prop Dia.</label>
 
       <input
@@ -83,13 +84,15 @@
 
         <label>City / Zip</label>
         <input
+          name="location"
           type='text'
           placeholder='0'
+          [(ngModel)]="cityZip"
           >
 
-        <button class='button' (click)="getWeather">
+        <button class='button' (click)="sendCityZip()">
         WEATHER
-        </button>
+      </button>
       </div>
     </div>
 

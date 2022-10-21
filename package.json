@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "dev": "netlify dev",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -20,6 +21,8 @@
     "@angular/platform-browser": "~13.3.0",
     "@angular/platform-browser-dynamic": "~13.3.0",
     "@angular/router": "~13.3.0",
+    "@netlify/functions": "^1.3.0",
+    "node-fetch": "^3.2.10",
     "nvm": "0.0.4",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

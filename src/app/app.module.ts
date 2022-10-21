@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
 
 import { AppComponent } from './app.component';
 import { DialogComponent } from './dialog/dialog.component';
@@ -25,6 +26,7 @@ import { HeaderComponent } from './header/header.component';
     FormsModule,
     HttpClientModule,
     MatDialogModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

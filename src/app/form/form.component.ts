@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { WeatherService } from '../weather.service';
+import { WeatherService } from '../services/weather.service';
+import { InputValues, WeatherData } from '../types/interfaces';
+import { InputStore } from '../constants/input-values';
 
 @Component({
   selector: 'app-form',
@@ -8,22 +10,22 @@ import { WeatherService } from '../weather.service';
 })
 export class FormComponent implements OnInit {
 
+  cityZip: string = '';
+  myData: any = [];
   weather: any;
+  inputs: InputValues = InputStore;
 
   @Input() blur = false;
 
-  constructor(private wxService: WeatherService) { }
 
-  ngOnInit(): void {
-    this.getWeather();
-  }
+  constructor(
+    private wxService: WeatherService
+    ) { }
 
-  getWeather() {
-    this.wxService.getWeather().subscribe({
-      next: res => this.weather = res,
-      error: err => console.error(err),
-      complete: () => console.log(this.weather)
-    });
+  ngOnInit(): void { }
+
+  sendCityZip() {
+    this.wxService.storeCityZip(this.cityZip);
   }
 
 }
