@@ -1,20 +1,18 @@
 @import '../../scss-variables';
 
-#temp {
-  color: gray;
-  font-size: 16px;
-}
 
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
+  // -webkit-appearance: none;
+  appearance: none;
   margin: 0;
 }
 
 /* Firefox */
 input[type=number] {
-  -moz-appearance: textfield;
+  // -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 input:focus {
@@ -115,6 +113,11 @@ label {
   flex-direction: column;
   grid-column: 1 / 2;
   align-items: center;
+  border-radius: inherit;
+}
+
+.right-side {
+  border-radius: inherit;
 }
 
 .options {

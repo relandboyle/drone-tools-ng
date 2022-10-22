@@ -1,14 +1,14 @@
 
 <div class="input-form" [ngClass]="blur ? 'modal-active' : 'init'">
-
-  <form class='form'>
+  
+  <form [formGroup]="inputForm" class='form'>
 
     <div class='units'>
         <input
           id="imperial"
           type='radio'
-          name='units'
           value='imperial'
+          formControlName="units"
           >
       <label class='unitsLabel' htmlFor='imperial'>
         Imperial
@@ -17,9 +17,8 @@
         <input
           id="metric"
           type='radio'
-          name='units'
           value='metric'
-          checked='true'
+          formControlName="units"
           >
       <label class='unitsLabel' htmlFor='metric'>
         Metric
@@ -31,15 +30,17 @@
       <label>Prop Dia.</label>
 
       <input
+        formControlName="propDiameter"
         class='propDia'
-        placeholder='0'
         type='number'
         step='any'
         inputMode='decimal'
+        placeholder='0'
         >
 
       <label>Batt Volts (V)</label>
       <input
+        formControlName="battVoltage"
         class='battV'
         type='number'
         inputMode='decimal'
@@ -49,6 +50,7 @@
 
       <label>Motor (kV)</label>
       <input
+        formControlName="motorVoltage"
         class='motorKv'
         type='number'
         inputMode='decimal'
@@ -56,13 +58,18 @@
         placeholder='0'
         >
 
-      <button type="submit" class='button'>PROP TIP SPEED</button>
+      <button
+        class='button'
+        (click)="onSubmit()"
+        >PROP TIP SPEED
+      </button>
     </div>
 
     <div class='right-side'>
       <div class='inputs-right'>
         <label>Airspeed</label>
         <input
+          formControlName="airspeed"
           id='airspeed'
           class='airspeedKnots'
           type='number'
@@ -75,6 +82,7 @@
       <div class='options'>
         <label>Altitude (ft)</label>
         <input
+          formControlName="altitude"
           class='altitude'
           type='number'
           inputMode='decimal'
@@ -84,15 +92,17 @@
 
         <label>City / Zip</label>
         <input
+          formControlName="location"
           name="location"
           type='text'
-          placeholder='0'
-          [(ngModel)]="cityZip"
+          placeholder='location'
           >
 
-        <button class='button' (click)="sendCityZip()">
-        WEATHER
-      </button>
+        <button
+          class='button'
+          (click)="sendCityZip()"
+          >WEATHER
+        </button>
       </div>
     </div>
 
