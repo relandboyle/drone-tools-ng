@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { WeatherService } from '../services/weather.service';
-import { InputValues, WeatherData } from '../types/interfaces';
-import { InputStore } from '../constants/input-values';
+import { InputValues, WeatherData } from '../constants/interfaces';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { CalculationsService } from '../services/calculations.service';
 
 @Component({
   selector: 'app-form',
@@ -13,7 +13,6 @@ export class FormComponent implements OnInit {
 
   myData: any = [];
   weather: any;
-  inputs: InputValues = InputStore;
   inputForm!: FormGroup;
 
   @Input() blur = false;
@@ -22,6 +21,7 @@ export class FormComponent implements OnInit {
   constructor(
     private wxService: WeatherService,
     private fb: FormBuilder,
+    private calcs: CalculationsService,
     ) { }
 
   ngOnInit(): void {
@@ -40,8 +40,9 @@ export class FormComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
+  submitValues(): void {
     console.log(this.inputForm.value);
+    this.calcs.calculateMach1(this.inputForm);
   }
 
   sendCityZip() {

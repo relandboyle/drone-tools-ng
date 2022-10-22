@@ -17,7 +17,6 @@
     if local mach 1 has not been calculated but tip speed has been calculated, display tip speed and 'enter location for local mach 1'
   -->
   <div class='local-mach-1'>
-    <p>{{weather | json }}</p>
     <div *ngIf="location || metersPerSecond">
       <p *ngIf="units === 'imperial'; else metricUnits">`Tip Speed: fpsTipSpeedString | Local Mach 1: fpsLocalMach1String`</p>
       <ng-template #metricUnits>`Tip Speed: mpsTipSpeedString | Local Mach 1: mpsLocalMach1String`</ng-template>

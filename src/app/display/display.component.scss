@@ -76,7 +76,7 @@
   font-size: 2em;
   font-weight: bold;
   margin-bottom: 8px;
-  text-shadow: $magenta-text-shadow;
+  filter: $magenta-drop-shadow;
 }
 
 .outputs > * > p {

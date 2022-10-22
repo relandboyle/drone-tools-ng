@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { WeatherService } from '../services/weather.service';
-import { InputValues, WeatherData } from './../types/interfaces';
-import { InputStore } from '../constants/input-values';
+import { InputValues, WeatherData } from '../constants/interfaces';
 
 @Component({
   selector: 'app-display',
@@ -11,18 +10,17 @@ import { InputStore } from '../constants/input-values';
 export class DisplayComponent implements OnInit {
 
   cityZip: string = '';
-  inputs: InputValues = InputStore;
   weather!: WeatherData;
 
-  @Input() blur?: boolean = false;
-  @Input() location = '';
-  @Input() wxConditions = '';
-  @Input() wxHumidity = '';
-  @Input() temperature = '';
-  @Input() pressure = '';
-  @Input() units = '';
-  @Input() machNumber = '';
-  @Input() metersPerSecond = '';
+  blur?: boolean = false;
+  location = '';
+  wxConditions = '';
+  wxHumidity = '';
+  temperature = '';
+  pressure = '';
+  units = '';
+  machNumber = '';
+  metersPerSecond = '';
   
 
   constructor(
