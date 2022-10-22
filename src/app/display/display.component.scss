@@ -1,8 +1,15 @@
 @import '../../scss-variables';
 
+:host {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
 .outputs {
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-items: flex-start;
   border-top: solid 2px $main-magenta;
   border-bottom: solid 2px $main-magenta;
@@ -69,7 +76,7 @@
   font-size: 2em;
   font-weight: bold;
   margin-bottom: 8px;
-  filter: $magenta-shadow;
+  text-shadow: $magenta-text-shadow;
 }
 
 .outputs > * > p {
