@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { WeatherService } from '../services/weather.service';
-import { InputValues, WeatherData } from '../constants/interfaces';
-import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { CalculationsService } from '../services/calculations.service';
 
 @Component({
@@ -14,14 +13,13 @@ export class FormComponent implements OnInit {
   myData: any = [];
   weather: any;
   inputForm!: FormGroup;
-
   @Input() blur = false;
 
 
   constructor(
     private wxService: WeatherService,
+    private calcsService: CalculationsService,
     private fb: FormBuilder,
-    private calcs: CalculationsService,
     ) { }
 
   ngOnInit(): void {
@@ -30,19 +28,18 @@ export class FormComponent implements OnInit {
 
   initializeForm(): void {
     this.inputForm = this.fb.group({
-      units: 'imperial',
-      propDiameter: null,
-      battVoltage: null,
-      motorVoltage: null,
       airspeed: null,
       altitude: null,
+      battVoltage: null,
       location: '',
+      motorVoltage: null,
+      propDiameter: null,
+      units: 'imperial',
     });
   }
 
   submitValues(): void {
-    console.log(this.inputForm.value);
-    this.calcs.calculateMach1(this.inputForm);
+    this.calcsService.calculate(this.inputForm.value);
   }
 
   sendCityZip() {

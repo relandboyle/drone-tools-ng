@@ -3,13 +3,14 @@
 
   <!-- display current local weather info if data has been fetched from the weather API -->
   <div class='weather'>
-    <p *ngIf="location !== ''">City: {{location}} | Current: {{wxConditions}} | Temp: {{temperature}} | Humidity: {{wxHumidity}}% | Pressure: {{pressure}}</p>
+    <p *ngIf="weather">City: {{weather.name}} | Current: {{weather.region}} | Temp: {{weather.temp_f}} | Humidity: {{weather.humidity}}% | Pressure: {{weather.pressure_in}}</p>
   </div>
 
-  <!-- display imperial or metric calculated value based on current state of 'units' -->
+  <!-- display imperial or metric calculated tip speed value based on current state of 'displayValues.units' -->
   <div class='output-value'>
-    <p *ngIf="machNumber; else machNum">Mach {{machNumber}}</p>
-    <ng-template #machNum>Mach #</ng-template>
+    Mach
+    <span *ngIf="weather && values; else machNum">{{values}}</span>
+    <ng-template #machNum>#</ng-template>
   </div>
 
   <!--
@@ -17,10 +18,10 @@
     if local mach 1 has not been calculated but tip speed has been calculated, display tip speed and 'enter location for local mach 1'
   -->
   <div class='local-mach-1'>
-    <div *ngIf="location || metersPerSecond">
-      <p *ngIf="units === 'imperial'; else metricUnits">`Tip Speed: fpsTipSpeedString | Local Mach 1: fpsLocalMach1String`</p>
+    <p *ngIf="weather || values">
+      <span *ngIf="values.units === 'imperial'; else metricUnits">`Tip Speed: fpsTipSpeedString | Local Mach 1: fpsLocalMach1String`</span>
       <ng-template #metricUnits>`Tip Speed: mpsTipSpeedString | Local Mach 1: mpsLocalMach1String`</ng-template>
-    </div>
+    </p>
   </div>
 
 </div>
