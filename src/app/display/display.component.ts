@@ -12,6 +12,7 @@ export class DisplayComponent implements OnInit {
 
   cityZip: string = '';
   fpsTipSpeedString: string = '';
+  machNumber: number = 0;
   mpsTipSpeedString: string = '';
   revolveRates!: RevolveRates;
   values!: DisplayValues;
@@ -28,6 +29,13 @@ export class DisplayComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.cityZip, this.values, this.weather);
 
+    this.activateSubscriptions();
+
+    console.log(this.cityZip, this.values, this.weather);
+  }
+
+
+  activateSubscriptions() {
     this.calcsService.displayValues.subscribe({
       next: values => {
         console.log('DISPLAY VALUES', values);
@@ -40,7 +48,7 @@ export class DisplayComponent implements OnInit {
         console.log('REVOLVE RATES', rates);
         this.revolveRates = rates;
       }
-    })
+    });
 
     this.wxService.cityZip.subscribe({
       next: zip => {
@@ -48,8 +56,11 @@ export class DisplayComponent implements OnInit {
         this.getWeather();
       }
     });
+  }
 
-    console.log(this.cityZip, this.values, this.weather);
+
+  calculateMachNumber() {
+    // const machNumber: number = (localMach1Mps) ? parseFloat((this.revolveRates.metersPerSecond / localMach1Mps).toFixed(2)) : 0;
   }
 
 
