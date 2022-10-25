@@ -54,7 +54,9 @@ export class DisplayComponent implements OnInit {
       next: zip => {
         this.cityZip = zip;
         this.getWeather();
-      }
+      },
+      error: err => console.error('Weather Service error:', err),
+      complete: () => console.log('Subscribed to Weather Service')
     });
   }
 
@@ -68,7 +70,7 @@ export class DisplayComponent implements OnInit {
     this.wxService.getWeather(this.cityZip)
     .subscribe({
       next: res => this.weather = res,
-      error: err => console.error(err),
+      error: err => console.error('Weather Fetch error:', err),
       complete: () => console.log('getWeather COMPLETE', this.weather)
     });
   }

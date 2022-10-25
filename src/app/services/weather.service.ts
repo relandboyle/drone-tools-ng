@@ -16,6 +16,7 @@ export class WeatherService {
   ) { }
 
   getWeather(location: string): Observable<any> {
+    console.log(location)
     const headers = new HttpHeaders;
     return this.http.get(this.url, {
       headers: headers,

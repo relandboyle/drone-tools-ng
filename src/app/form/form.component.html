@@ -1,10 +1,13 @@
 
 <div class="input-form" [ngClass]="blur ? 'modal-active' : 'init'">
 
-  <p>{{inputForm.value | json}}</p>
-  <p>Units: {{propDiameterUnits}}</p>
-  <button (click)="test()">TOGGLE</button>
-  <button (click)="test2()">ADD VALUES</button>
+  <!-- <p>Input: {{inputForm.value.propDiameter}}</p>
+  <p>Inches: {{inputForm.value.propDiameterIn}}</p>
+  <p>Metric: {{inputForm.value.propDiameterMm}}</p>
+  <p>Units: {{inputForm.value.units}}</p> -->
+  <!-- <button (click)="test()">TOGGLE</button>
+  <button (click)="test2()">ADD VALUES</button> -->
+  <p>Inches: {{inputForm.value.location}}</p>
 
   <form [formGroup]="inputForm" class='form'>
 
@@ -14,9 +17,8 @@
           type='radio'
           value='imperial'
           formControlName="units"
-          (change)="test3()"
           >
-      <label class='unitsLabel' for='imperial' (click)="performConversions('imperial')">
+      <label class='unitsLabel' for='imperial' (click)="handleUnits('imperial')">
         Imperial
       </label>
 
@@ -25,9 +27,8 @@
           type='radio'
           value='metric'
           formControlName="units"
-          (change)="test3()"
           >
-      <label class='unitsLabel' for='metric' (click)="performConversions('metric')">
+      <label class='unitsLabel' for='metric' (click)="handleUnits('metric')">
         Metric
       </label>
     </div>
@@ -37,13 +38,12 @@
       <label>Prop Dia. {{ inputForm.value.units === 'imperial' ? '(in)' : '(mm)' }}</label>
 
       <input
-        [formControlName]="propDiameterUnits"
+        formControlName="propDiameter"
         class='propDiameter'
         type='number'
         step='any'
         inputMode='decimal'
         placeholder='0'
-        (change)="test3()"
         >
 
       <label>Batt Volts (V)</label>

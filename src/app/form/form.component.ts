@@ -1,17 +1,18 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { WeatherService } from '../services/weather.service';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { CalculationsService } from '../services/calculations.service';
-import { distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss']
 })
-export class FormComponent implements OnInit, OnDestroy {
+export class FormComponent implements OnInit {
 
   inputForm!: FormGroup;
+  location: string = '';
+  flag: boolean = true;
   @Input() blur = false;
 
 
@@ -24,6 +25,7 @@ export class FormComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initializeForm();
+    this.syncValues()
   }
 
 
@@ -34,9 +36,32 @@ export class FormComponent implements OnInit, OnDestroy {
       battVoltage: new FormControl(),
       location: '',
       motorVoltage: new FormControl(),
+      propDiameter: new FormControl(),
       propDiameterIn: new FormControl(),
       propDiameterMm: new FormControl(),
       units: 'imperial',
+    });
+  }
+
+
+  syncValues() {
+    const form = this.inputForm;
+
+    this.inputForm.get('propDiameter')?.valueChanges.subscribe(input => {
+      if (this.flag === false) return;
+
+      if (form.value.units === 'imperial') {
+        form.patchValue({
+          propDiameterIn: input,
+          propDiameterMm: parseFloat((input * 25.4).toFixed(1)) || null
+        });
+      }
+      else if (form.value.units === 'metric') {
+        form.patchValue({
+          propDiameterIn: parseFloat((input / 25.4).toFixed(1)) || null,
+          propDiameterMm: input
+        });
+      }
     });
   }
 
@@ -51,58 +76,17 @@ export class FormComponent implements OnInit, OnDestroy {
   }
 
 
-  test() {
+  handleUnits(units: string): void {
+    console.log(units === this.inputForm.value.units)
 
-  }
+    this.flag = false;
 
+    (units !== this.inputForm.value.units) &&
+      (units === 'imperial')
+        ? this.inputForm.patchValue({ propDiameter: this.inputForm.value.propDiameterIn })
+        : this.inputForm.patchValue({ propDiameter: this.inputForm.value.propDiameterMm });
 
-  test2() {
-    this.inputForm.patchValue({
-      propDiameterIn: 6,
-      propDiameterMm: 150,
-    });
-
-    console.log(this.inputForm.value);
-  }
-
-
-  test3() {
-    console.log(this.inputForm.value)
-  }
-
-
-  performConversions(units: string): void {
-
-    // if Imperial is selected, propDiaIn is user input value and propDiaMm is calculated
-    // if Metric is selected, propDiaMm is user input value and propDiaIn is calculated
-    // update propDiaIn and propDiaMm in state
-
-    let propDiaIn = 0;
-    let propDiaMm = 0;
-    // console.log('BEFORE', {propDiaIn, propDiaMm, units})
-
-    if (units === 'imperial') {
-      propDiaIn = this.inputForm.value.propDiameterIn;
-      propDiaMm = parseFloat((this.inputForm.value.propDiameterIn * 25.4).toFixed(1));
-      this.inputForm.patchValue({ units: 'imperial' });
-    }
-    if (units === 'metric') {
-      propDiaIn = parseFloat((this.inputForm.value.propDiameterMm / 25.4).toFixed(1));
-      propDiaMm = this.inputForm.value.propDiameterMm;
-      this.inputForm.patchValue({ units: 'metric' });
-    }
-    this.inputForm.patchValue({
-      propDiameterIn: propDiaIn,
-      propDiameterMm: propDiaMm,
-    });
-
-    // console.log('AFTER', {propDiaIn, propDiaMm, units})
-    // console.log(this.inputForm.value.propDiameterIn, this.inputForm.value.propDiameterMm);
-  }
-
-
-  ngOnDestroy(): void {
-    console.log('ON DESTROY');
+    this.flag = true;
   }
 
 }
