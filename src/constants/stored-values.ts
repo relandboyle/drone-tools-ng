@@ -1,5 +1,5 @@
 
-export const InputStore = {
+export const valueStore = {
   unitsMetric: '',
   unitsImperial: '',
   propDiaMetric: 0,

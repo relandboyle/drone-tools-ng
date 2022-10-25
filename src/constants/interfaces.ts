@@ -1,4 +1,3 @@
-
 export interface WeatherData {
   humidity: number,
   pressure_in: number,
@@ -13,15 +12,18 @@ export interface WeatherData {
   region: string
 }
 
-
-export interface InputValues {
-  unitsMetric: string,
-  unitsImperial: string,
-  propDiaMetric: number,
-  propDiaImperial: number,
+export interface DisplayValues {
+  airspeedKph: number,
+  airspeedKnots: number,
+  altitude: number,
   battVoltage: number,
   motorVoltage: number,
-  airspeedKnots: number,
-  airspeedKph: number,
-  altitude: number
+  propDiaImperial: number,
+  propDiaMetric: number,
+  units: string,
+}
+
+export interface RevolveRates {
+  feetPerSecond: number,
+  metersPerSecond: number,
 }

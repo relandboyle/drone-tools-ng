@@ -1,6 +1,14 @@
 
 <div class="input-form" [ngClass]="blur ? 'modal-active' : 'init'">
-  
+
+  <!-- <p>Input: {{inputForm.value.propDiameter}}</p>
+  <p>Inches: {{inputForm.value.propDiameterIn}}</p>
+  <p>Metric: {{inputForm.value.propDiameterMm}}</p>
+  <p>Units: {{inputForm.value.units}}</p> -->
+  <!-- <button (click)="test()">TOGGLE</button>
+  <button (click)="test2()">ADD VALUES</button> -->
+  <p>Inches: {{inputForm.value.location}}</p>
+
   <form [formGroup]="inputForm" class='form'>
 
     <div class='units'>
@@ -10,7 +18,7 @@
           value='imperial'
           formControlName="units"
           >
-      <label class='unitsLabel' htmlFor='imperial'>
+      <label class='unitsLabel' for='imperial' (click)="handleUnits('imperial')">
         Imperial
       </label>
 
@@ -20,18 +28,18 @@
           value='metric'
           formControlName="units"
           >
-      <label class='unitsLabel' htmlFor='metric'>
+      <label class='unitsLabel' for='metric' (click)="handleUnits('metric')">
         Metric
       </label>
     </div>
 
     <div class='inputs'>
-      
-      <label>Prop Dia.</label>
+
+      <label>Prop Dia. {{ inputForm.value.units === 'imperial' ? '(in)' : '(mm)' }}</label>
 
       <input
         formControlName="propDiameter"
-        class='propDia'
+        class='propDiameter'
         type='number'
         step='any'
         inputMode='decimal'
@@ -60,18 +68,18 @@
 
       <button
         class='button'
-        (click)="onSubmit()"
+        (click)="submitValues()"
         >PROP TIP SPEED
       </button>
     </div>
 
     <div class='right-side'>
       <div class='inputs-right'>
-        <label>Airspeed</label>
+        <label>Airspeed {{ inputForm.value.units === 'imperial' ? '(knots)' : '(KPH)' }}</label>
         <input
           formControlName="airspeed"
           id='airspeed'
-          class='airspeedKnots'
+          class='airspeed'
           type='number'
           inputMode='decimal'
           step='any'

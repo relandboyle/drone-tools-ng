@@ -8,7 +8,7 @@ export async function handler (event: HandlerEvent) {
   const key = environment.weatherKey;
   const { location }: any = event.queryStringParameters;
   const requestUrl = `https://api.weatherapi.com/v1/current.json?key=${key}&q=${location}&aqi=no`;
-
+  console.log(requestUrl)
   try {
     const response: HandlerResponse = await fetch(requestUrl)
     .then(res => {
@@ -22,7 +22,7 @@ export async function handler (event: HandlerEvent) {
     });
     return response;
   }
-  
+
   catch (err: any) {
     return {
       statusCode: err.statusCode || 500,
