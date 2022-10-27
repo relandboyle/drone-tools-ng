@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { WeatherService } from '../services/weather.service';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { CalculationsService } from '../services/calculations.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-form',
@@ -12,7 +13,6 @@ export class FormComponent implements OnInit {
 
   inputForm!: FormGroup;
   location: string = '';
-  flag: boolean = true;
   @Input() blur = false;
 
 
@@ -20,18 +20,20 @@ export class FormComponent implements OnInit {
     private wxService: WeatherService,
     private calcsService: CalculationsService,
     private fb: FormBuilder,
-    ) { }
+  ) { }
 
 
   ngOnInit(): void {
     this.initializeForm();
-    this.syncValues()
+    this.syncValues();
   }
 
 
   initializeForm(): void {
     this.inputForm = this.fb.group({
       airspeed: new FormControl(),
+      airspeedKph: new FormControl(),
+      airspeedKnots: new FormControl(),
       altitude: new FormControl(),
       battVoltage: new FormControl(),
       location: '',
@@ -44,22 +46,27 @@ export class FormComponent implements OnInit {
   }
 
 
-  syncValues() {
+  syncValues(): void {
     const form = this.inputForm;
 
-    this.inputForm.get('propDiameter')?.valueChanges.subscribe(input => {
-      if (this.flag === false) return;
-
+    form.valueChanges.subscribe(input => {
+      console.log('INPUT', input)
       if (form.value.units === 'imperial') {
         form.patchValue({
-          propDiameterIn: input,
-          propDiameterMm: parseFloat((input * 25.4).toFixed(1)) || null
+          propDiameter: form.value.propDiameterIn || null,
+          propDiameterMm: parseFloat((form.value.propDiameterIn * 25.4).toFixed(1)) || null,
+        },
+        {
+          emitEvent: false
         });
       }
       else if (form.value.units === 'metric') {
         form.patchValue({
-          propDiameterIn: parseFloat((input / 25.4).toFixed(1)) || null,
-          propDiameterMm: input
+          propDiameter: form.value.propDiameterMm || null,
+          propDiameterIn: parseFloat((form.value.propDiameterMm / 25.4).toFixed(1)) || null,
+        },
+        {
+          emitEvent: false
         });
       }
     });
@@ -71,22 +78,8 @@ export class FormComponent implements OnInit {
   }
 
 
-  sendCityZip(): void {
+  sendLocation(): void {
     this.wxService.storeCityZip(this.inputForm.value.location);
-  }
-
-
-  handleUnits(units: string): void {
-    console.log(units === this.inputForm.value.units)
-
-    this.flag = false;
-
-    (units !== this.inputForm.value.units) &&
-      (units === 'imperial')
-        ? this.inputForm.patchValue({ propDiameter: this.inputForm.value.propDiameterIn })
-        : this.inputForm.patchValue({ propDiameter: this.inputForm.value.propDiameterMm });
-
-    this.flag = true;
   }
 
 }

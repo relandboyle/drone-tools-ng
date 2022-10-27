@@ -1,13 +1,7 @@
 
 <div class="input-form" [ngClass]="blur ? 'modal-active' : 'init'">
 
-  <!-- <p>Input: {{inputForm.value.propDiameter}}</p>
-  <p>Inches: {{inputForm.value.propDiameterIn}}</p>
-  <p>Metric: {{inputForm.value.propDiameterMm}}</p>
-  <p>Units: {{inputForm.value.units}}</p> -->
-  <!-- <button (click)="test()">TOGGLE</button>
-  <button (click)="test2()">ADD VALUES</button> -->
-  <p>Inches: {{inputForm.value.location}}</p>
+  <p>{{inputForm.value | json}}</p>
 
   <form [formGroup]="inputForm" class='form'>
 
@@ -18,7 +12,7 @@
           value='imperial'
           formControlName="units"
           >
-      <label class='unitsLabel' for='imperial' (click)="handleUnits('imperial')">
+      <label class='unitsLabel' for='imperial'>
         Imperial
       </label>
 
@@ -28,7 +22,7 @@
           value='metric'
           formControlName="units"
           >
-      <label class='unitsLabel' for='metric' (click)="handleUnits('metric')">
+      <label class='unitsLabel' for='metric'>
         Metric
       </label>
     </div>
@@ -36,15 +30,25 @@
     <div class='inputs'>
 
       <label>Prop Dia. {{ inputForm.value.units === 'imperial' ? '(in)' : '(mm)' }}</label>
-
       <input
-        formControlName="propDiameter"
+        *ngIf="inputForm.value.units === 'imperial'; else metricInput"
+        formControlName="propDiameterIn"
         class='propDiameter'
         type='number'
         step='any'
         inputMode='decimal'
         placeholder='0'
         >
+      <ng-template #metricInput>
+        <input
+          formControlName="propDiameterMm"
+          class='propDiameter'
+          type='number'
+          step='any'
+          inputMode='decimal'
+          placeholder='0'
+        >
+      </ng-template>
 
       <label>Batt Volts (V)</label>
       <input
@@ -108,7 +112,7 @@
 
         <button
           class='button'
-          (click)="sendCityZip()"
+          (click)="sendLocation()"
           >WEATHER
         </button>
       </div>
