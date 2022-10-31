@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { WeatherService } from '../services/weather.service';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { CalculationsService } from '../services/calculations.service';
+import { combineLatest, combineLatestAll, forkJoin, merge, Observable, withLatestFrom, tap, zip, from, of, mergeWith } from 'rxjs';
+
 
 @Component({
   selector: 'app-form',
@@ -12,7 +14,6 @@ export class FormComponent implements OnInit {
 
   inputForm!: FormGroup;
   location: string = '';
-  flag: boolean = true;
   @Input() blur = false;
 
 
@@ -20,73 +21,101 @@ export class FormComponent implements OnInit {
     private wxService: WeatherService,
     private calcsService: CalculationsService,
     private fb: FormBuilder,
-    ) { }
+  ) { }
 
 
   ngOnInit(): void {
     this.initializeForm();
-    this.syncValues()
+    this.syncValues();
   }
 
 
   initializeForm(): void {
     this.inputForm = this.fb.group({
-      airspeed: new FormControl(),
+      airspeedKph: new FormControl(),
+      airspeedKnots: new FormControl(),
       altitude: new FormControl(),
       battVoltage: new FormControl(),
-      location: '',
+      location: new FormControl(''),
       motorVoltage: new FormControl(),
-      propDiameter: new FormControl(),
       propDiameterIn: new FormControl(),
       propDiameterMm: new FormControl(),
-      units: 'imperial',
+      units: new FormControl('imperial'),
     });
   }
 
 
-  syncValues() {
+  syncValues(): void {
     const form = this.inputForm;
+    const noEmit = { emitEvent: false };
+    const diameterImperial = form.controls['propDiameterIn'];
+    const diameterMetric = form.controls['propDiameterMm'];
+    const airspeedKnots = form.controls['airspeedKnots'];
+    const airspeedKph = form.controls['airspeedKph'];
+    const units = form.controls['units'];
 
-    this.inputForm.get('propDiameter')?.valueChanges.subscribe(input => {
-      if (this.flag === false) return;
 
-      if (form.value.units === 'imperial') {
+    diameterImperial.valueChanges.subscribe(input => {
+      if (form.value.units === 'imperial' && diameterMetric.pristine) {
         form.patchValue({
-          propDiameterIn: input,
-          propDiameterMm: parseFloat((input * 25.4).toFixed(1)) || null
-        });
+          propDiameterMm: parseFloat((input * 25.4).toFixed(2)) || null
+        }, noEmit);
       }
-      else if (form.value.units === 'metric') {
+    });
+
+
+    diameterMetric.valueChanges.subscribe(input => {
+      if (form.value.units === 'metric' && diameterImperial.pristine) {
         form.patchValue({
-          propDiameterIn: parseFloat((input / 25.4).toFixed(1)) || null,
-          propDiameterMm: input
-        });
+          propDiameterIn: parseFloat((input / 25.4).toFixed(1)) || null
+        }, noEmit);
+      }
+    });
+
+
+    airspeedKnots.valueChanges.subscribe(input => {
+      if (form.value.units === 'imperial' && airspeedKph.pristine) {
+        form.patchValue({
+          airspeedKph: parseFloat((input * 1.852).toFixed(1)) || null
+        }, noEmit);
+      }
+    });
+
+
+    airspeedKph.valueChanges.subscribe(input => {
+      if (form.value.units === 'metric' && airspeedKnots.pristine) {
+        form.patchValue({
+          airspeedKnots:  parseFloat((input * 0.539957).toFixed(1)) || null
+        }, noEmit);
+      }
+    });
+
+
+    units.valueChanges.subscribe(change => {
+      if (change === 'imperial') {
+        diameterMetric.markAsPristine();
+        airspeedKph.markAsPristine();
+
+      }
+      else if (change === 'metric') {
+        diameterImperial.markAsPristine();
+        airspeedKnots.markAsPristine();
       }
     });
   }
 
 
   submitValues(): void {
-    this.calcsService.calculate(this.inputForm.value);
+    console.log(Object.entries(this.inputForm.value).forEach((value: any) => {
+      console.log(value)
+    }))
+    Object.entries(this.inputForm.controls).forEach((value: any) => {
+      console.table(value[1].pristine, value[0])
+    })
   }
 
 
-  sendCityZip(): void {
+  sendLocation(): void {
     this.wxService.storeCityZip(this.inputForm.value.location);
   }
-
-
-  handleUnits(units: string): void {
-    console.log(units === this.inputForm.value.units)
-
-    this.flag = false;
-
-    (units !== this.inputForm.value.units) &&
-      (units === 'imperial')
-        ? this.inputForm.patchValue({ propDiameter: this.inputForm.value.propDiameterIn })
-        : this.inputForm.patchValue({ propDiameter: this.inputForm.value.propDiameterMm });
-
-    this.flag = true;
-  }
-
 }

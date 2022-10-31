@@ -10,7 +10,7 @@ import { CalculationsService } from '../services/calculations.service';
 })
 export class DisplayComponent implements OnInit {
 
-  cityZip: string = '';
+  cityZip: string = 'United States';
   fpsTipSpeedString: string = '';
   machNumber: number = 0;
   mpsTipSpeedString: string = '';
@@ -40,13 +40,6 @@ export class DisplayComponent implements OnInit {
       next: values => {
         console.log('DISPLAY VALUES', values);
         this.values = values;
-      }
-    });
-
-    this.calcsService.revolveRates.subscribe({
-      next: rates => {
-        console.log('REVOLVE RATES', rates);
-        this.revolveRates = rates;
       }
     });
 

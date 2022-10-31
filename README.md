@@ -6,7 +6,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Run `npm run dev` for to start the Angular app and a Netlify dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
@@ -27,3 +27,27 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+
+
+
+Units toggle logic
+
+If units is imperial,
+  user enters value to propDiameterIn, airspeedKnots
+  value is mirrored to propDiameterStore, airspeedStore
+  if propDiameterMm is Pristine,
+    value is used to derive propDiameterMm, airspeedKph
+
+When units is changed from imperial to metric
+  propDiameterMm is displayed
+  propDiameterIn is marked Pristine
+
+Consider only updating the value on diameterMm when units is changed
+If a value has been entered in diameterIn, then it is dirty
+If units toggle, then derive diameterMm from diameterIn
+diameterMm is still pristine
+if the value in diameterMm is modified, diameterMm is dirty
+if units toggle after modifiied diameterMm, then derive diameterIn from diameterMm
+else if units toggled and diameterMm is pristine, do not update diameterIn

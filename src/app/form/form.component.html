@@ -1,13 +1,22 @@
 
 <div class="input-form" [ngClass]="blur ? 'modal-active' : 'init'">
 
-  <!-- <p>Input: {{inputForm.value.propDiameter}}</p>
-  <p>Inches: {{inputForm.value.propDiameterIn}}</p>
-  <p>Metric: {{inputForm.value.propDiameterMm}}</p>
-  <p>Units: {{inputForm.value.units}}</p> -->
-  <!-- <button (click)="test()">TOGGLE</button>
-  <button (click)="test2()">ADD VALUES</button> -->
-  <p>Inches: {{inputForm.value.location}}</p>
+  <!-- <div class="test-outer">
+    <div>
+    <p>units: {{inputForm.value.units}}</p>
+    <p>diameter inches: {{inputForm.value.propDiameterIn}}</p>
+    <p>diameter metric: {{inputForm.value.propDiameterMm}}</p>
+    <p>airspeed knots: {{inputForm.value.airspeedKnots}}</p>
+    <p>airspeed KPH: {{inputForm.value.airspeedKph}}</p>
+  </div>
+  <div>
+    <p>pristine: {{inputForm.controls['units'].pristine}}</p>
+    <p>pristine: {{inputForm.controls['propDiameterIn'].pristine}}</p>
+    <p>pristine: {{inputForm.controls['propDiameterMm'].pristine}}</p>
+    <p>pristine: {{inputForm.controls['airspeedKnots'].pristine}}</p>
+    <p>pristine: {{inputForm.controls['airspeedKph'].pristine}}</p>
+  </div>
+</div> -->
 
   <form [formGroup]="inputForm" class='form'>
 
@@ -18,7 +27,7 @@
           value='imperial'
           formControlName="units"
           >
-      <label class='unitsLabel' for='imperial' (click)="handleUnits('imperial')">
+      <label class='unitsLabel' for='imperial'>
         Imperial
       </label>
 
@@ -28,7 +37,7 @@
           value='metric'
           formControlName="units"
           >
-      <label class='unitsLabel' for='metric' (click)="handleUnits('metric')">
+      <label class='unitsLabel' for='metric'>
         Metric
       </label>
     </div>
@@ -36,15 +45,25 @@
     <div class='inputs'>
 
       <label>Prop Dia. {{ inputForm.value.units === 'imperial' ? '(in)' : '(mm)' }}</label>
-
       <input
-        formControlName="propDiameter"
+        *ngIf="inputForm.value.units === 'imperial'; else metricDiameter"
+        formControlName="propDiameterIn"
         class='propDiameter'
         type='number'
-        step='any'
+        step='0.1'
         inputMode='decimal'
         placeholder='0'
         >
+      <ng-template #metricDiameter>
+        <input
+          formControlName="propDiameterMm"
+          class='propDiameter'
+          type='number'
+          step='0.01'
+          inputMode='decimal'
+          placeholder='0'
+        >
+      </ng-template>
 
       <label>Batt Volts (V)</label>
       <input
@@ -75,9 +94,11 @@
 
     <div class='right-side'>
       <div class='inputs-right'>
+
         <label>Airspeed {{ inputForm.value.units === 'imperial' ? '(knots)' : '(KPH)' }}</label>
         <input
-          formControlName="airspeed"
+          *ngIf="inputForm.value.units === 'imperial'; else metricAirspeed"
+          formControlName="airspeedKnots"
           id='airspeed'
           class='airspeed'
           type='number'
@@ -85,6 +106,17 @@
           step='any'
           placeholder='0'
           >
+          <ng-template #metricAirspeed>
+            <input
+            formControlName="airspeedKph"
+            id='airspeed'
+            class='airspeed'
+            type='number'
+            inputMode='decimal'
+            step='any'
+            placeholder='0'
+            >
+          </ng-template>
       </div>
 
       <div class='options'>
@@ -108,7 +140,7 @@
 
         <button
           class='button'
-          (click)="sendCityZip()"
+          (click)="sendLocation()"
           >WEATHER
         </button>
       </div>
