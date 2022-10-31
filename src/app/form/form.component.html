@@ -1,26 +1,22 @@
 
 <div class="input-form" [ngClass]="blur ? 'modal-active' : 'init'">
 
-  <div class="test-outer">
-    <div class="test-inputs">
+  <!-- <div class="test-outer">
+    <div>
     <p>units: {{inputForm.value.units}}</p>
-    <p>diameter store: {{inputForm.value.propDiameterStore}}</p>
     <p>diameter inches: {{inputForm.value.propDiameterIn}}</p>
     <p>diameter metric: {{inputForm.value.propDiameterMm}}</p>
-    <p>airspeed store: {{inputForm.value.airspeedStore}}</p>
     <p>airspeed knots: {{inputForm.value.airspeedKnots}}</p>
     <p>airspeed KPH: {{inputForm.value.airspeedKph}}</p>
   </div>
-  <div class="pristine-state">
-    <p>units: {{inputForm.controls['units'].pristine}}</p>
-    <p>diameter store: {{inputForm.controls['propDiameterStore'].pristine}}</p>
-    <p>diameter inches: {{inputForm.controls['propDiameterIn'].pristine}}</p>
-    <p>diameter metric: {{inputForm.controls['propDiameterMm'].pristine}}</p>
-    <p>airspeed store: {{inputForm.controls['airspeedStore'].pristine}}</p>
-    <p>airspeed knots: {{inputForm.controls['airspeedKnots'].pristine}}</p>
-    <p>airspeed KPH: {{inputForm.controls['airspeedKph'].pristine}}</p>
+  <div>
+    <p>pristine: {{inputForm.controls['units'].pristine}}</p>
+    <p>pristine: {{inputForm.controls['propDiameterIn'].pristine}}</p>
+    <p>pristine: {{inputForm.controls['propDiameterMm'].pristine}}</p>
+    <p>pristine: {{inputForm.controls['airspeedKnots'].pristine}}</p>
+    <p>pristine: {{inputForm.controls['airspeedKph'].pristine}}</p>
   </div>
-</div>
+</div> -->
 
   <form [formGroup]="inputForm" class='form'>
 
