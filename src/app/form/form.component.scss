@@ -44,6 +44,15 @@ label {
   -webkit-user-select: none;
 }
 
+// input:invalid {
+//   border-color: red;
+// }
+
+.test-outer {
+  display: flex;
+  justify-content: space-around;
+}
+
 .input-form {
   font-family: 'B612', sans-serif;
   font-size: 0.75em;
@@ -211,7 +220,7 @@ label {
   .input-form {
     max-width: 95vw;
   }
-  
+
   .button {
     height: 60px;
     font-size: 1em;

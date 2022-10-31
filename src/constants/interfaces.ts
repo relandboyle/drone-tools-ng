@@ -13,13 +13,16 @@ export interface WeatherData {
 }
 
 export interface DisplayValues {
+  airspeedStore: number,
   airspeedKph: number,
   airspeedKnots: number,
   altitude: number,
   battVoltage: number,
+  location: string,
   motorVoltage: number,
-  propDiaImperial: number,
-  propDiaMetric: number,
+  propDiameterStore: number,
+  propDiameterIn: number,
+  propDiameterMm: number,
   units: string,
 }
 
