@@ -1,13 +1,14 @@
 
 <div class="input-form" [ngClass]="blur ? 'modal-active' : 'init'">
 
-  <!-- <div class="test-outer">
+  <div class="test-outer">
     <div>
     <p>units: {{inputForm.value.units}}</p>
     <p>diameter inches: {{inputForm.value.propDiameterIn}}</p>
     <p>diameter metric: {{inputForm.value.propDiameterMm}}</p>
     <p>airspeed knots: {{inputForm.value.airspeedKnots}}</p>
     <p>airspeed KPH: {{inputForm.value.airspeedKph}}</p>
+    <p>location: {{inputForm.value.location}}</p>
   </div>
   <div>
     <p>pristine: {{inputForm.controls['units'].pristine}}</p>
@@ -16,7 +17,7 @@
     <p>pristine: {{inputForm.controls['airspeedKnots'].pristine}}</p>
     <p>pristine: {{inputForm.controls['airspeedKph'].pristine}}</p>
   </div>
-</div> -->
+</div>
 
   <form [formGroup]="inputForm" class='form'>
 
@@ -106,17 +107,17 @@
           step='any'
           placeholder='0'
           >
-          <ng-template #metricAirspeed>
-            <input
-            formControlName="airspeedKph"
-            id='airspeed'
-            class='airspeed'
-            type='number'
-            inputMode='decimal'
-            step='any'
-            placeholder='0'
-            >
-          </ng-template>
+        <ng-template #metricAirspeed>
+          <input
+          formControlName="airspeedKph"
+          id='airspeed'
+          class='airspeed'
+          type='number'
+          inputMode='decimal'
+          step='any'
+          placeholder='0'
+          >
+        </ng-template>
       </div>
 
       <div class='options'>
@@ -130,12 +131,12 @@
           placeholder='0'
           >
 
-        <label>City / Zip</label>
+        <label>Location</label>
         <input
           formControlName="location"
           name="location"
           type='text'
-          placeholder='location'
+          placeholder='city / zip'
           >
 
         <button
