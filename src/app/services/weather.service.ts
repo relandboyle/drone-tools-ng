@@ -36,29 +36,21 @@ export class WeatherService {
 
   getWeather(location: string): Observable<any> {
     const headers = new HttpHeaders;
-    const weather = this.http.get(this.url, {
+    return this.http.get(this.url, {
       headers: headers,
       params: {
         location: location
       }
-    }).pipe(
-
-    );
-
-
-
-    // return of(this.weatherData);
-    return weather;
-
+    });
   }
 
 
-  storeCityZip(input: string) {
+  storeCityZip(input: string): void {
     this.cityZip.next(input);
   }
 
 
-  calculateLocalMach1(localTemp: number, altitude?: number) {
+  calculateLocalMach1(localTemp: number, altitude?: number): void {
     // use standard mach 1 and local temp and optionally altitude to calculate local mach 1
   }
 

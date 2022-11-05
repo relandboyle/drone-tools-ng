@@ -29,11 +29,7 @@ export class DisplayComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log(this.cityZip, this.values, this.weather);
-
     this.activateSubscriptions();
-
-    console.log(this.cityZip, this.values, this.weather);
   }
 
 
@@ -63,14 +59,8 @@ export class DisplayComponent implements OnInit {
 
 
   getWeather(): void {
-    this.wxService.getWeather(this.cityZip).pipe(
-      tap(res => {
-        Object.entries(res).forEach((val: any) => console.log(val))
-      }),
-    ).subscribe({
-      next: res => {
-        this.weather = res;
-      },
+    this.wxService.getWeather(this.cityZip).subscribe({
+      next: res => this.weather = res,
       error: err => console.error('Weather Fetch error:', err),
       complete: () => console.log('getWeather COMPLETE', this.weather)
     });
