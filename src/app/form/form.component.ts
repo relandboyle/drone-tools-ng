@@ -106,12 +106,7 @@ export class FormComponent implements OnInit {
 
 
   submitValues(): void {
-    console.log(Object.entries(this.inputForm.value).forEach((value: any) => {
-      console.log(value)
-    }))
-    Object.entries(this.inputForm.controls).forEach((value: any) => {
-      console.table(value[1].pristine, value[0])
-    })
+    this.calcsService.calculate(this.inputForm);
   }
 
 

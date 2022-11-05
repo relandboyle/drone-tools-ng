@@ -9,18 +9,16 @@ export interface WeatherData {
   wind_mph: number,
   country: string,
   name: string,
-  region: string
+  region: string,
 }
 
 export interface DisplayValues {
-  airspeedStore: number,
   airspeedKph: number,
   airspeedKnots: number,
   altitude: number,
   battVoltage: number,
   location: string,
   motorVoltage: number,
-  propDiameterStore: number,
   propDiameterIn: number,
   propDiameterMm: number,
   units: string,

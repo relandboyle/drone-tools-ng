@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { WeatherService } from '../services/weather.service';
 import { DisplayValues, RevolveRates, WeatherData } from '../../constants/interfaces';
 import { CalculationsService } from '../services/calculations.service';
+import { catchError, from, of, map, Observable, tap, Subject, switchMap, mergeMap, merge, mergeAll, concat, concatMap, scan, pluck, toArray, filter, pairs, expand, exhaustMap } from 'rxjs';
+
 
 @Component({
   selector: 'app-display',
@@ -10,13 +12,13 @@ import { CalculationsService } from '../services/calculations.service';
 })
 export class DisplayComponent implements OnInit {
 
-  cityZip: string = 'United States';
+  cityZip: string = '';
   fpsTipSpeedString: string = '';
   machNumber: number = 0;
   mpsTipSpeedString: string = '';
   revolveRates!: RevolveRates;
   values!: DisplayValues;
-  weather!: WeatherData;
+  weather!: any;
   @Input() blur = false;
 
 
@@ -35,7 +37,8 @@ export class DisplayComponent implements OnInit {
   }
 
 
-  activateSubscriptions() {
+  activateSubscriptions(): void {
+
     this.calcsService.displayValues.subscribe({
       next: values => {
         console.log('DISPLAY VALUES', values);
@@ -44,12 +47,12 @@ export class DisplayComponent implements OnInit {
     });
 
     this.wxService.cityZip.subscribe({
-      next: zip => {
-        this.cityZip = zip;
+      next: cityZip => {
+        this.cityZip = cityZip;
         this.getWeather();
       },
-      error: err => console.error('Weather Service error:', err),
-      complete: () => console.log('Subscribed to Weather Service')
+      error: err => console.error('Error processing Location:', err),
+      complete: () => console.log('Subscribed to User Location')
     });
   }
 
@@ -59,10 +62,15 @@ export class DisplayComponent implements OnInit {
   }
 
 
-  getWeather() {
-    this.wxService.getWeather(this.cityZip)
-    .subscribe({
-      next: res => this.weather = res,
+  getWeather(): void {
+    this.wxService.getWeather(this.cityZip).pipe(
+      tap(res => {
+        Object.entries(res).forEach((val: any) => console.log(val))
+      }),
+    ).subscribe({
+      next: res => {
+        this.weather = res;
+      },
       error: err => console.error('Weather Fetch error:', err),
       complete: () => console.log('getWeather COMPLETE', this.weather)
     });
