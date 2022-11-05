@@ -4,6 +4,7 @@ export interface WeatherData {
   pressure_mb: number,
   temp_c: number,
   temp_f: number,
+  text: string,
   wind_dir: string,
   wind_kph: number,
   wind_mph: number,

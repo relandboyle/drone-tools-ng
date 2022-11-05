@@ -12,13 +12,12 @@ import { catchError, from, of, map, Observable, tap, Subject, switchMap, mergeMa
 })
 export class DisplayComponent implements OnInit {
 
-  cityZip: string = '';
   fpsTipSpeedString: string = '';
   machNumber: number = 0;
   mpsTipSpeedString: string = '';
   revolveRates!: RevolveRates;
   values!: DisplayValues;
-  weather!: any;
+  weather!: WeatherData;
   @Input() blur = false;
 
 
@@ -29,41 +28,29 @@ export class DisplayComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.activateSubscriptions();
-  }
-
-
-  activateSubscriptions(): void {
 
     this.calcsService.displayValues.subscribe({
       next: values => {
         console.log('DISPLAY VALUES', values);
         this.values = values;
+      },
+      error: err => console.error('Error calculating values', err),
+      complete: () => console.log('Subscribed to calculations', this.values)
+    });
+
+    this.wxService.weather.subscribe({
+      next: wx => {
+        this.weather = wx;
+        console.log('WEATHER VALUES', this.weather);
       }
     });
 
-    this.wxService.cityZip.subscribe({
-      next: cityZip => {
-        this.cityZip = cityZip;
-        this.getWeather();
-      },
-      error: err => console.error('Error processing Location:', err),
-      complete: () => console.log('Subscribed to User Location')
-    });
   }
+
 
 
   calculateMachNumber() {
     // const machNumber: number = (localMach1Mps) ? parseFloat((this.revolveRates.metersPerSecond / localMach1Mps).toFixed(2)) : 0;
-  }
-
-
-  getWeather(): void {
-    this.wxService.getWeather(this.cityZip).subscribe({
-      next: res => this.weather = res,
-      error: err => console.error('Weather Fetch error:', err),
-      complete: () => console.log('getWeather COMPLETE', this.weather)
-    });
   }
 
 

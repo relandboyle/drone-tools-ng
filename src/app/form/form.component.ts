@@ -111,6 +111,6 @@ export class FormComponent implements OnInit {
 
 
   sendLocation(): void {
-    this.wxService.storeCityZip(this.inputForm.value.location);
+    this.wxService.getWeather(this.inputForm.value.location);
   }
 }

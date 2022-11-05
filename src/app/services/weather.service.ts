@@ -9,24 +9,26 @@ import { WeatherData } from 'src/constants/interfaces';
 })
 export class WeatherService {
 
-  weatherStore: any;
-  weatherData: WeatherData = {
-    humidity: 0,
-    pressure_in: 0,
-    pressure_mb: 0,
-    temp_c: 0,
-    temp_f: 0,
-    wind_dir: '',
-    wind_kph: 0,
-    wind_mph: 0,
-    country: '',
-    name: '',
-    region: '',
-  }
+  cityZip: string = '';
+  weatherData: any = {};
+  weatherKeys: string[] = [
+    'humidity',
+    'pressure_in',
+    'pressure_mb',
+    'temp_c',
+    'temp_f',
+    'text',
+    'wind_dir',
+    'wind_kph',
+    'wind_mph',
+    'country',
+    'name',
+    'region',
+  ]
 
-  private url = environment.weatherUrl;
-  public cityZip = new Subject<string>();
+  private weatherUrl = environment.weatherUrl;
   public localMach1 = new Subject<number>();
+  public weather = new Subject<any>();
 
 
   constructor(
@@ -34,19 +36,29 @@ export class WeatherService {
   ) { }
 
 
-  getWeather(location: string): Observable<any> {
+  getWeather(location: string): void {
     const headers = new HttpHeaders;
-    return this.http.get(this.url, {
+    const wxResponse = this.http.get(this.weatherUrl, {
       headers: headers,
       params: {
         location: location
       }
     });
-  }
 
+    wxResponse.subscribe({
+      next: wx => {
+        const stage1 = Object.entries(wx).map(entry => entry[1]);
+        const stage2 = { ...stage1[0], ...stage1[1], text: stage1[1].condition.text };
+        delete stage2.condition;
+        this.weatherKeys.forEach((key: string) => {
+          this.weatherData[key] = stage2[key]
+        });
 
-  storeCityZip(input: string): void {
-    this.cityZip.next(input);
+        this.weather.next(this.weatherData);
+      },
+      error: err => console.error('Error fetching weather:', err),
+      complete: () => console.log('Fetch weather complete')
+    });
   }
 
 
