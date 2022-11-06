@@ -1,8 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
-import { catchError, from, of, map, Observable, tap, Subject, switchMap, mergeMap, merge, mergeAll, concat, concatMap, scan, pluck, toArray, filter, pairs, expand } from 'rxjs';
-import { WeatherData } from 'src/constants/interfaces';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

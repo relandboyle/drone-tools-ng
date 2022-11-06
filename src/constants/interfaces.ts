@@ -13,19 +13,13 @@ export interface WeatherData {
   region: string,
 }
 
-export interface DisplayValues {
-  airspeedKph: number,
-  airspeedKnots: number,
-  altitude: number,
-  battVoltage: number,
-  location: string,
-  motorVoltage: number,
-  propDiameterIn: number,
-  propDiameterMm: number,
-  units: string,
-}
-
-export interface RevolveRates {
+export interface TipSpeeds {
   feetPerSecond: number,
   metersPerSecond: number,
+
+}
+
+export interface MachValues {
+  localMach1: number,
+  machNumber: number,
 }

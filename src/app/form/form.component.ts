@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { WeatherService } from '../services/weather.service';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { CalculationsService } from '../services/calculations.service';
-import { combineLatest, combineLatestAll, forkJoin, merge, Observable, withLatestFrom, tap, zip, from, of, mergeWith } from 'rxjs';
 
 
 @Component({
@@ -95,7 +94,6 @@ export class FormComponent implements OnInit {
       if (change === 'imperial') {
         diameterMetric.markAsPristine();
         airspeedKph.markAsPristine();
-
       }
       else if (change === 'metric') {
         diameterImperial.markAsPristine();
@@ -106,7 +104,7 @@ export class FormComponent implements OnInit {
 
 
   submitValues(): void {
-    this.calcsService.calculate(this.inputForm);
+    this.calcsService.calculatePropTipSpeed(this.inputForm);
   }
 
 

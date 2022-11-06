@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { WeatherService } from '../services/weather.service';
-import { DisplayValues, RevolveRates, WeatherData } from '../../constants/interfaces';
+import { TipSpeeds, WeatherData } from '../../constants/interfaces';
 import { CalculationsService } from '../services/calculations.service';
-import { catchError, from, of, map, Observable, tap, Subject, switchMap, mergeMap, merge, mergeAll, concat, concatMap, scan, pluck, toArray, filter, pairs, expand, exhaustMap } from 'rxjs';
 
 
 @Component({
@@ -13,10 +12,9 @@ import { catchError, from, of, map, Observable, tap, Subject, switchMap, mergeMa
 export class DisplayComponent implements OnInit {
 
   fpsTipSpeedString: string = '';
-  machNumber: number = 0;
   mpsTipSpeedString: string = '';
-  revolveRates!: RevolveRates;
-  values!: DisplayValues;
+  propTipSpeeds!: TipSpeeds;
+  units: string = '';
   weather!: WeatherData;
   @Input() blur = false;
 
@@ -29,14 +27,18 @@ export class DisplayComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.calcsService.displayValues.subscribe({
+    this.calcsService.propTipSpeeds.subscribe({
       next: values => {
-        console.log('DISPLAY VALUES', values);
-        this.values = values;
+        console.log('TIP SPEEDS', values);
+        this.propTipSpeeds = values;
       },
-      error: err => console.error('Error calculating values', err),
-      complete: () => console.log('Subscribed to calculations', this.values)
+      error: err => console.error('Error calculating prop tip speeds', err),
+      complete: () => {
+        console.log('Subscribed to prop tip speeds', this.propTipSpeeds);
+      }
     });
+
+    this.calcsService.calculateLocalMach1(this.weather.temp_c, 0);
 
     this.wxService.weather.subscribe({
       next: wx => {
@@ -45,12 +47,6 @@ export class DisplayComponent implements OnInit {
       }
     });
 
-  }
-
-
-
-  calculateMachNumber() {
-    // const machNumber: number = (localMach1Mps) ? parseFloat((this.revolveRates.metersPerSecond / localMach1Mps).toFixed(2)) : 0;
   }
 
 

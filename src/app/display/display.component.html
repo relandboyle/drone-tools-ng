@@ -1,5 +1,5 @@
-
-<!-- // TODO: conditionally render two different inputs based on the state of inputForm.units -->
+<p>{{ weather | json }}</p>
+<p>{{ propTipSpeeds | json }}</p>
 
 <div class="outputs" [ngClass]="!blur ? 'modal-active' : 'init'">
 
@@ -11,7 +11,7 @@
   <!-- display imperial or metric calculated tip speed value based on current state of 'displayValues.units' -->
   <div class='output-value'>
     Mach
-    <span *ngIf="weather && values; else machNum">{{values}}</span>
+    <span *ngIf="weather && propTipSpeeds; else machNum">{{propTipSpeeds}}</span>
     <ng-template #machNum>#</ng-template>
   </div>
 
@@ -20,9 +20,9 @@
     if local mach 1 has not been calculated but tip speed has been calculated, display tip speed and 'enter location for local mach 1'
   -->
   <div class='local-mach-1'>
-    <p *ngIf="weather || values">
-      <span *ngIf="values.units === 'imperial'; else metricUnits">`Tip Speed: fpsTipSpeedString | Local Mach 1: fpsLocalMach1String`</span>
-      <ng-template #metricUnits>`Tip Speed: mpsTipSpeedString | Local Mach 1: mpsLocalMach1String`</ng-template>
+    <p *ngIf="weather || propTipSpeeds">
+      <span *ngIf="units === 'imperial'; else metricUnits">Tip Speed: fpsTipSpeedString | Local Mach 1: fpsLocalMach1String</span>
+      <ng-template #metricUnits>Tip Speed: mpsTipSpeedString | Local Mach 1: mpsLocalMach1String</ng-template>
     </p>
   </div>
 
