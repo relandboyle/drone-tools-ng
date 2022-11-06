@@ -27,6 +27,7 @@ export class WeatherService {
 
   private weatherUrl = environment.weatherUrl;
   public localMach1 = new Subject<number>();
+  public temp_c = new Subject<number>();
   public weather = new Subject<any>();
 
 
@@ -53,6 +54,7 @@ export class WeatherService {
           this.weatherData[key] = stage2[key]
         });
 
+        this.temp_c.next(stage2.temp_c);
         this.weather.next(this.weatherData);
       },
       error: err => console.error('Error fetching weather:', err),

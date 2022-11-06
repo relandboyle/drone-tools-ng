@@ -14,12 +14,13 @@ export interface WeatherData {
 }
 
 export interface TipSpeeds {
+  altitude: number,
   feetPerSecond: number,
   metersPerSecond: number,
-
+  units: string,
 }
 
 export interface MachValues {
-  localMach1: number,
-  machNumber: number,
+  localMach1Fps: number,
+  localMach1Mps: number,
 }

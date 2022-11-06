@@ -110,5 +110,6 @@ export class FormComponent implements OnInit {
 
   sendLocation(): void {
     this.wxService.getWeather(this.inputForm.value.location);
+    this.calcsService.calculateLocalMach1();
   }
 }

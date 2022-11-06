@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { WeatherService } from '../services/weather.service';
-import { TipSpeeds, WeatherData } from '../../constants/interfaces';
+import { MachValues, TipSpeeds, WeatherData } from '../../constants/interfaces';
 import { CalculationsService } from '../services/calculations.service';
+import { Subject } from 'rxjs';
 
 
 @Component({
@@ -14,9 +15,12 @@ export class DisplayComponent implements OnInit {
   fpsTipSpeedString: string = '';
   mpsTipSpeedString: string = '';
   propTipSpeeds!: TipSpeeds;
+  machValues!: MachValues;
   units: string = '';
   weather!: WeatherData;
   @Input() blur = false;
+
+  public temp_c = new Subject<number>();
 
 
   constructor(
@@ -27,25 +31,22 @@ export class DisplayComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.calcsService.propTipSpeeds.subscribe({
-      next: values => {
-        console.log('TIP SPEEDS', values);
-        this.propTipSpeeds = values;
-      },
-      error: err => console.error('Error calculating prop tip speeds', err),
-      complete: () => {
-        console.log('Subscribed to prop tip speeds', this.propTipSpeeds);
-      }
+    this.calcsService.propTipSpeeds.subscribe(values => {
+      this.propTipSpeeds = values;
+      console.log('TIP SPEEDS', this.propTipSpeeds);
     });
 
-    this.calcsService.calculateLocalMach1(this.weather.temp_c, 0);
-
-    this.wxService.weather.subscribe({
-      next: wx => {
-        this.weather = wx;
-        console.log('WEATHER VALUES', this.weather);
-      }
+    this.wxService.weather.subscribe(wx => {
+      this.weather = wx;
+      this.temp_c.next(wx.temp_c);
+      console.log('WEATHER VALUES', this.weather);
     });
+
+    this.calcsService.machValues.subscribe(values => {
+      this.machValues = values;
+      console.log('MACH VALUES', this.machValues);
+    });
+
 
   }
 
