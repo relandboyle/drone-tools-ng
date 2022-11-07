@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { WeatherService } from '../services/weather.service';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { CalculationsService } from '../services/calculations.service';
-import { combineLatest, combineLatestAll, forkJoin, merge, Observable, withLatestFrom, tap, zip, from, of, mergeWith } from 'rxjs';
+import { Subject } from 'rxjs';
 
 
 @Component({
@@ -14,7 +14,9 @@ export class FormComponent implements OnInit {
 
   inputForm!: FormGroup;
   location: string = '';
-  @Input() blur = false;
+  @Input() blur!: boolean;
+
+  public units = new Subject<string>();
 
 
   constructor(
@@ -53,6 +55,7 @@ export class FormComponent implements OnInit {
     const airspeedKnots = form.controls['airspeedKnots'];
     const airspeedKph = form.controls['airspeedKph'];
     const units = form.controls['units'];
+    this.units.next(form.value.units);
 
 
     diameterImperial.valueChanges.subscribe(input => {
@@ -92,10 +95,11 @@ export class FormComponent implements OnInit {
 
 
     units.valueChanges.subscribe(change => {
+      this.wxService.getUnits(change);
+
       if (change === 'imperial') {
         diameterMetric.markAsPristine();
         airspeedKph.markAsPristine();
-
       }
       else if (change === 'metric') {
         diameterImperial.markAsPristine();
@@ -106,11 +110,12 @@ export class FormComponent implements OnInit {
 
 
   submitValues(): void {
-    this.calcsService.calculate(this.inputForm);
+    this.calcsService.calculatePropTipSpeed(this.inputForm);
   }
 
 
   sendLocation(): void {
-    this.wxService.storeCityZip(this.inputForm.value.location);
+    this.wxService.getWeather(this.inputForm.value.location);
+    this.calcsService.calculateLocalMach1(this.inputForm.value.altitude);
   }
 }

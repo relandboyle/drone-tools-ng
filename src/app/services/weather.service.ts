@@ -1,32 +1,35 @@
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Injectable } from '@angular/core';
-import { catchError, from, of, map, Observable, tap, Subject, switchMap, mergeMap, merge, mergeAll, concat, concatMap, scan, pluck, toArray, filter, pairs, expand } from 'rxjs';
-import { WeatherData } from 'src/constants/interfaces';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WeatherService {
 
-  weatherStore: any;
-  weatherData: WeatherData = {
-    humidity: 0,
-    pressure_in: 0,
-    pressure_mb: 0,
-    temp_c: 0,
-    temp_f: 0,
-    wind_dir: '',
-    wind_kph: 0,
-    wind_mph: 0,
-    country: '',
-    name: '',
-    region: '',
-  }
+  cityZip: string = '';
+  weatherData: any = {};
+  weatherKeys: string[] = [
+    'humidity',
+    'pressure_in',
+    'pressure_mb',
+    'temp_c',
+    'temp_f',
+    'text',
+    'wind_dir',
+    'wind_kph',
+    'wind_mph',
+    'country',
+    'name',
+    'region',
+  ]
 
-  private url = environment.weatherUrl;
-  public cityZip = new Subject<string>();
+  private weatherUrl = environment.weatherUrl;
   public localMach1 = new Subject<number>();
+  public temp_c = new Subject<number>();
+  public units = new Subject<string>();
+  public weather = new Subject<any>();
 
 
   constructor(
@@ -34,24 +37,36 @@ export class WeatherService {
   ) { }
 
 
-  getWeather(location: string): Observable<any> {
+  getWeather(location: string): void {
     const headers = new HttpHeaders;
-    return this.http.get(this.url, {
+    const wxResponse = this.http.get(this.weatherUrl, {
       headers: headers,
       params: {
         location: location
       }
     });
+
+    wxResponse.subscribe({
+      next: wx => {
+        console.log(wx)
+        const stage1 = Object.entries(wx).map(entry => entry[1]);
+        const stage2 = { ...stage1[0], ...stage1[1], text: stage1[1].condition.text };
+        delete stage2.condition;
+        this.weatherKeys.forEach((key: string) => {
+          this.weatherData[key] = stage2[key]
+        });
+
+        this.temp_c.next(stage2.temp_c);
+        this.weather.next(this.weatherData);
+        console.log(this.weatherData)
+      },
+      error: err => console.error('Error fetching weather:', err),
+      complete: () => console.log('Fetch weather complete')
+    });
   }
 
-
-  storeCityZip(input: string): void {
-    this.cityZip.next(input);
-  }
-
-
-  calculateLocalMach1(localTemp: number, altitude?: number): void {
-    // use standard mach 1 and local temp and optionally altitude to calculate local mach 1
+  getUnits(units: string) {
+    this.units.next(units);
   }
 
 }

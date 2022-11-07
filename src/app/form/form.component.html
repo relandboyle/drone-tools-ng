@@ -1,9 +1,10 @@
 
 <div class="input-form" [ngClass]="blur ? 'modal-active' : 'init'">
 
-  <div class="test-outer">
+  <!-- <div class="test-outer">
     <div>
     <p>units: {{inputForm.value.units}}</p>
+    <p>altitude: {{inputForm.value.altitude}}</p>
     <p>diameter inches: {{inputForm.value.propDiameterIn}}</p>
     <p>diameter metric: {{inputForm.value.propDiameterMm}}</p>
     <p>airspeed knots: {{inputForm.value.airspeedKnots}}</p>
@@ -12,12 +13,13 @@
   </div>
   <div>
     <p>pristine: {{inputForm.controls['units'].pristine}}</p>
+    <p>pristine: {{inputForm.controls['altitude'].pristine}}</p>
     <p>pristine: {{inputForm.controls['propDiameterIn'].pristine}}</p>
     <p>pristine: {{inputForm.controls['propDiameterMm'].pristine}}</p>
     <p>pristine: {{inputForm.controls['airspeedKnots'].pristine}}</p>
     <p>pristine: {{inputForm.controls['airspeedKph'].pristine}}</p>
   </div>
-</div>
+</div> -->
 
   <form [formGroup]="inputForm" class='form'>
 
