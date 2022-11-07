@@ -1,6 +1,6 @@
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Injectable({
@@ -28,6 +28,7 @@ export class WeatherService {
   private weatherUrl = environment.weatherUrl;
   public localMach1 = new Subject<number>();
   public temp_c = new Subject<number>();
+  public units = new Subject<string>();
   public weather = new Subject<any>();
 
 
@@ -47,6 +48,7 @@ export class WeatherService {
 
     wxResponse.subscribe({
       next: wx => {
+        console.log(wx)
         const stage1 = Object.entries(wx).map(entry => entry[1]);
         const stage2 = { ...stage1[0], ...stage1[1], text: stage1[1].condition.text };
         delete stage2.condition;
@@ -56,15 +58,15 @@ export class WeatherService {
 
         this.temp_c.next(stage2.temp_c);
         this.weather.next(this.weatherData);
+        console.log(this.weatherData)
       },
       error: err => console.error('Error fetching weather:', err),
       complete: () => console.log('Fetch weather complete')
     });
   }
 
-
-  calculateLocalMach1(localTemp: number, altitude?: number): void {
-    // use standard mach 1 and local temp and optionally altitude to calculate local mach 1
+  getUnits(units: string) {
+    this.units.next(units);
   }
 
 }

@@ -1,4 +1,5 @@
 export interface WeatherData {
+  altitude: number,
   humidity: number,
   pressure_in: number,
   pressure_mb: number,
@@ -14,10 +15,8 @@ export interface WeatherData {
 }
 
 export interface TipSpeeds {
-  altitude: number,
   feetPerSecond: number,
   metersPerSecond: number,
-  units: string,
 }
 
 export interface MachValues {
