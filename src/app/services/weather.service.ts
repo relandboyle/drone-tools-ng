@@ -23,7 +23,7 @@ export class WeatherService {
     'country',
     'name',
     'region',
-  ]
+  ];
 
   private weatherUrl = environment.weatherUrl;
   public localMach1 = new Subject<number>();

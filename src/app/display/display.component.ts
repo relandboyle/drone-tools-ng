@@ -32,18 +32,24 @@ export class DisplayComponent implements OnInit {
 
     this.calcsService.propTipSpeeds.subscribe(values => {
       this.propTipSpeeds = values;
+      if (this.machValues) {
+        this.machNumber = parseFloat((this.propTipSpeeds.metersPerSecond / this.machValues.localMach1Mps).toFixed(2));
+      }
       // console.log('TIP SPEEDS', this.propTipSpeeds);
+    });
+
+    this.calcsService.machValues.subscribe(values => {
+      this.machValues = values;
+      if (this.propTipSpeeds) {
+        this.machNumber = parseFloat((this.propTipSpeeds.metersPerSecond / this.machValues.localMach1Mps).toFixed(2));
+      }
+      // console.log('MACH VALUES', this.machValues);
     });
 
     this.wxService.weather.subscribe(wx => {
       this.weather = wx;
       this.temp_c.next(wx.temp_c);
       // console.log('WEATHER VALUES', this.weather);
-    });
-
-    this.calcsService.machValues.subscribe(values => {
-      this.machValues = values;
-      // console.log('MACH VALUES', this.machValues);
     });
 
     this.wxService.units.subscribe(units => {
