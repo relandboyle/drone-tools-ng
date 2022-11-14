@@ -23,3 +23,17 @@ export interface MachValues {
   localMach1Fps: number,
   localMach1Mps: number,
 }
+
+export interface DisplayValues {
+  enterLocation: string | null,
+  enterSpecs: string | null,
+  localMach1Imperial: string | null,
+  localMach1Metric: string | null,
+  machNumber: string | null,
+  pressureImperial: string | null,
+  pressureMetric: string | null,
+  tipSpeedImperial: string | null,
+  tipSpeedMetric: string | null,
+  temperatureImperial: string | null,
+  temperatureMetric: string | null
+}

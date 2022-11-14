@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { WeatherService } from '../services/weather.service';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { CalculationsService } from '../services/calculations.service';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { WeatherService } from '../services/weather.service';
+import { DialogComponent } from '../dialog/dialog.component';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 
 
@@ -12,6 +14,7 @@ import { Subject } from 'rxjs';
 })
 export class FormComponent implements OnInit {
 
+  dialogTitle: string = 'Testing Dialog Title';
   inputForm!: FormGroup;
   location: string = '';
   @Input() blur!: boolean;
@@ -22,6 +25,7 @@ export class FormComponent implements OnInit {
   constructor(
     private wxService: WeatherService,
     private calcsService: CalculationsService,
+    private dialog: MatDialog,
     private fb: FormBuilder,
   ) { }
 
@@ -48,6 +52,7 @@ export class FormComponent implements OnInit {
 
 
   syncValues(): void {
+
     const form = this.inputForm;
     const noEmit = { emitEvent: false };
     const diameterImperial = form.controls['propDiameterIn'];
@@ -111,6 +116,7 @@ export class FormComponent implements OnInit {
 
   submitValues(): void {
     this.calcsService.calculatePropTipSpeed(this.inputForm);
+    // this.openDialog();
   }
 
 
@@ -118,4 +124,19 @@ export class FormComponent implements OnInit {
     this.wxService.getWeather(this.inputForm.value.location);
     this.calcsService.calculateLocalMach1(this.inputForm.value.altitude);
   }
+
+
+  openDialog() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      id: 'input-error',
+      title: this.dialogTitle
+    }
+
+    this.dialog.open(DialogComponent, dialogConfig);
+  }
+  
 }

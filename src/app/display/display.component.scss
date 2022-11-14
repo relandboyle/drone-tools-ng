@@ -6,6 +6,10 @@
   align-content: center;
 }
 
+span {
+  animation: appear 400ms ease-in;
+}
+
 .outputs {
   display: flex;
   flex-direction: column;
