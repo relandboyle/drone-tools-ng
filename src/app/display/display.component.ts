@@ -74,6 +74,7 @@ export class DisplayComponent implements OnInit {
 
     this.wxService.weather.subscribe({
       next: wx => {
+        console.log(wx)
         this.weather = wx;
         this.temp_c.next(wx.temp_c);
         this.displayStrings.temperatureImperial = `Temp: ${wx.temp_f}${this.unitsDisplay.f}`;

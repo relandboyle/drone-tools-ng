@@ -138,5 +138,5 @@ export class FormComponent implements OnInit {
 
     this.dialog.open(DialogComponent, dialogConfig);
   }
-  
+
 }

@@ -1,11 +1,11 @@
 import { HandlerEvent, HandlerResponse } from '@netlify/functions';
-import { environment } from 'src/environments/environment';
 import fetch from 'node-fetch';
+require('dotenv').config();
 
 
 export async function handler (event: HandlerEvent) {
 
-  const key = environment.weatherKey;
+  const key = process.env['WEATHER_API_KEY'];
   const { location }: any = event.queryStringParameters;
   const requestUrl = `https://api.weatherapi.com/v1/current.json?key=${key}&q=${location}&aqi=no`;
 
