@@ -1,26 +1,6 @@
 
 <div class="input-form" [ngClass]="blur ? 'modal-active' : 'init'">
 
-  <!-- <div class="test-outer">
-    <div>
-    <p>units: {{inputForm.value.units}}</p>
-    <p>altitude: {{inputForm.value.altitude}}</p>
-    <p>diameter inches: {{inputForm.value.propDiameterIn}}</p>
-    <p>diameter metric: {{inputForm.value.propDiameterMm}}</p>
-    <p>airspeed knots: {{inputForm.value.airspeedKnots}}</p>
-    <p>airspeed KPH: {{inputForm.value.airspeedKph}}</p>
-    <p>location: {{inputForm.value.location}}</p>
-  </div>
-  <div>
-    <p>pristine: {{inputForm.controls['units'].pristine}}</p>
-    <p>pristine: {{inputForm.controls['altitude'].pristine}}</p>
-    <p>pristine: {{inputForm.controls['propDiameterIn'].pristine}}</p>
-    <p>pristine: {{inputForm.controls['propDiameterMm'].pristine}}</p>
-    <p>pristine: {{inputForm.controls['airspeedKnots'].pristine}}</p>
-    <p>pristine: {{inputForm.controls['airspeedKph'].pristine}}</p>
-  </div>
-</div> -->
-
   <form [formGroup]="inputForm" class='form'>
 
     <div class='units'>
@@ -97,7 +77,6 @@
 
     <div class='right-side'>
       <div class='inputs-right'>
-
         <label>Airspeed {{ inputForm.value.units === 'imperial' ? '(knots)' : '(KPH)' }}</label>
         <input
           *ngIf="inputForm.value.units === 'imperial'; else metricAirspeed"
