@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  weatherKey: '8741f4bfdbf044a79a9151604222503'
+  weatherUrl: 'http://localhost:8888/.netlify/functions/fetch-weather',
+  weatherKey: '000',
 };
