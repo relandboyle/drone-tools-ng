@@ -1,5 +1,6 @@
 components
 
+app
 header
 display
 form
@@ -7,13 +8,13 @@ form
 
 modules
 
-form?
-httpclient?
+app
 
 
 services
 
-httpclient?
+weather
+calculations
 
 
 lambda functions
@@ -43,3 +44,10 @@ calculating tip speed works
 TODO: weather service to build DisplayValues object (or map) to send to display component
 TODO: decide where/when to calculate local mach 1
 TODO: update variable references for display component
+
+11/05 - all logic and calculations are working as intended
+TODO: display all the values in the DisplayCompnent template
+TODO: refactor logic to flatten weather response object before sending to
+TODO: implement Doppler for managing environment variables
+TODO: deploy via AWS EC2 and/or S3
+TODO: connect Google domain dronetools-ng.dev
