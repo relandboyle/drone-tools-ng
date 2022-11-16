@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CalculationsService } from '../services/calculations.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { CalculationsService } from '../services/calculations.service';
 import { WeatherService } from '../services/weather.service';
 import { DialogComponent } from '../dialog/dialog.component';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 
 
@@ -52,7 +52,6 @@ export class FormComponent implements OnInit {
 
 
   syncValues(): void {
-
     const form = this.inputForm;
     const noEmit = { emitEvent: false };
     const diameterImperial = form.controls['propDiameterIn'];
@@ -115,8 +114,19 @@ export class FormComponent implements OnInit {
 
 
   submitValues(): void {
-    this.calcsService.calculatePropTipSpeed(this.inputForm);
-    // this.openDialog();
+    console.log(this.inputForm.controls)
+
+    if (
+      !this.inputForm.controls['propDiameterIn'].value
+      || !this.inputForm.controls['battVoltage'].value
+      || !this.inputForm.controls['motorVoltage'].value
+    ) {
+      console.log('OPEN DIALOG')
+      this.openDialog();
+    }
+    else {
+      this.calcsService.calculatePropTipSpeed(this.inputForm);
+    }
   }
 
 
@@ -134,6 +144,9 @@ export class FormComponent implements OnInit {
     dialogConfig.data = {
       id: 'input-error',
       title: this.dialogTitle
+    }
+    dialogConfig.position = {
+      top: '10%',
     }
 
     this.dialog.open(DialogComponent, dialogConfig);
