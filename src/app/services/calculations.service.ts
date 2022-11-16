@@ -44,7 +44,7 @@ export class CalculationsService {
   calculateLocalMach1(altitude: number) {
 
     this.wxService.temp_c.subscribe(temp_c => {
-      console.log('calculateLocalMach1', temp_c, this.altitude)
+      // console.log('calculateLocalMach1', temp_c, this.altitude)
 
       // calculate temperature at user input altitude
       const localTemp_c: number = temp_c - (altitude / 500);

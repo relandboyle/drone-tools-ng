@@ -53,7 +53,7 @@ export class DisplayComponent implements OnInit {
           this.machNumber = this.calculateMachNumber();
           this.displayStrings.machNumber = `Mach: ${this.machNumber}`;
         }
-        console.log(this.displayStrings);
+        // console.log(this.displayStrings);
       },
       error: err => console.error(err)
     });
@@ -67,21 +67,21 @@ export class DisplayComponent implements OnInit {
           this.machNumber = this.calculateMachNumber();
           this.displayStrings.machNumber = `Mach: ${this.machNumber}`;
         }
-        console.log(this.displayStrings);
+        // console.log(this.displayStrings);
       },
       error: err => console.error(err)
     });
 
     this.wxService.weather.subscribe({
       next: wx => {
-        console.log(wx)
+        // console.log(wx)
         this.weather = wx;
         this.temp_c.next(wx.temp_c);
         this.displayStrings.temperatureImperial = `Temp: ${wx.temp_f}${this.unitsDisplay.f}`;
         this.displayStrings.temperatureMetric = `Temp: ${wx.temp_c}${this.unitsDisplay.c}`;
         this.displayStrings.pressureImperial = `Pressure: ${wx.pressure_in}${this.unitsDisplay.hg}`;
         this.displayStrings.pressureMetric = `Pressure: ${wx.pressure_mb}${this.unitsDisplay.mb}`;
-        console.log(this.displayStrings);
+        // console.log(this.displayStrings);
       },
       error: err => console.error(err)
     });
