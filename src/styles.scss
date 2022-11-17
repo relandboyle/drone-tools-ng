@@ -1,4 +1,12 @@
+@use '@angular/material' as mat;
 @import './scss-variables';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~@angular/material/theming';
+
+$custom-typography: mat.define-typography-config(
+  $font-family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+  );
+@include mat.core($custom-typography);
 
 :host {
   background-color: $main-gray;
