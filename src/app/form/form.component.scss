@@ -21,7 +21,7 @@ input:focus {
   filter: $magenta-drop-shadow;
 }
 
-button {
+button:not(.test-button) {
   height: 50px;
   width: 65%;
   font-weight: bold;

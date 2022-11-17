@@ -9,18 +9,21 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class DialogComponent implements OnInit {
 
   data: any;
-  @Input() dialogMessage: string = '';
+  @Input() dialogMessage: string = 'Default Dialog Message String';
   // @Output() closeDialogEvent = new EventEmitter<string>();
 
   constructor(
-    public dialogRef: MatDialogRef<DialogComponent>,
-    // @Inject(MAT_DIALOG_DATA) data: InjectionToken<any>
+    private dialogRef: MatDialogRef<DialogComponent>,
+    @Inject(MAT_DIALOG_DATA) data: InjectionToken<any>
   ) {
-    // this.data = data;
-    // console.log(this.data);
+    this.data = data;
+    console.log(this.data);
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+
+    console.log('DialogComponent INIT')
+  }
 
 
   // closeDialog(event: string) {

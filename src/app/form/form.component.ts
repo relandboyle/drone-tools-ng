@@ -145,11 +145,13 @@ export class FormComponent implements OnInit {
       id: 'input-error',
       title: this.dialogTitle
     }
-    dialogConfig.position = {
-      top: '10%',
-    }
+
 
     this.dialog.open(DialogComponent, dialogConfig);
+  }
+
+  test() {
+    console.log('TEST BUTTON')
   }
 
 }

@@ -1,69 +1,70 @@
-// @import '../../scss-variables';
+@import '../../scss-variables';
 
-// .modal-overlay {
-//   position: fixed;
-//   height: 100vh;
-//   width: 100vw;
-//   background-color: rgba(40, 44, 52, 0.5);
-//   z-index: 1;
-// }
 
-// .modal-window {
-//   position: fixed;
-//   overflow: hidden;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   color: $main-blue;
-//   background-color: $main-gray;
-//   padding: 25px;
-//   left: 50%;
-//   top: 50%;
-//   transform: translate(-50%, -50%);
-//   font-family: 'B612', sans-serif;
-//   border: solid 2px $main-magenta;
-//   border-radius: 10px;
-//   filter: drop-shadow(0px 8px 15px rgb(0, 0, 0));
-//   user-select: none;
-//   -moz-user-select: none;
-//   -webkit-user-select: none;
-// }
+.modal-overlay {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(40, 44, 52, 0.5);
+  z-index: 1;
+}
 
-// .modal-window > button {
-//   margin-top: 10%;
-//   font-weight: bold;
-//   border-color: $main-magenta;
-// }
+.modal-window {
+  position: fixed;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: $main-blue;
+  background-color: $main-gray;
+  padding: 25px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'B612', sans-serif;
+  border: solid 2px $main-magenta;
+  border-radius: 10px;
+  filter: drop-shadow(0px 8px 15px rgb(0, 0, 0));
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
 
-// @media screen and(max-width: 540px) {
-//   button {
-//     height: 3em;
-//     cursor: default;
-//   }
-// }
+.modal-window > button {
+  margin-top: 10%;
+  font-weight: bold;
+  border-color: $main-magenta;
+}
 
-// .fade-in {
-//   animation: appear 300ms ease-in-out forwards;
-// }
+@media screen and(max-width: 540px) {
+  button {
+    height: 3em;
+    cursor: default;
+  }
+}
 
-// @keyframes appear {
-//   from {
-//     opacity: 0;
-//   }
-//   to {
-//     opacity: 1;
-//   }
-// }
+.fade-in {
+  animation: appear 300ms ease-in-out forwards;
+}
 
-// .fade-out {
-//   animation: disappear 300ms ease-in-out forwards;
-// }
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 
-// @keyframes disappear {
-//   from {
-//     opacity: 1;
-//   }
-//   to {
-//     opacity: 0;
-//   }
-// }
+.fade-out {
+  animation: disappear 300ms ease-in-out forwards;
+}
+
+@keyframes disappear {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
