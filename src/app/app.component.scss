@@ -1,9 +1,6 @@
 @import '../scss-variables';
 
 :host {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   height: 100vh;
   overflow: hidden;
   font-size: calc(10px + 2vmin);
@@ -17,8 +14,14 @@
   background-color: $main-gray;
 }
 
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .modal-active {
-  animation: blur 300ms forwards;
+  animation: blur 700ms forwards ease-out;
 }
 
 @keyframes blur {
@@ -31,7 +34,7 @@
 }
 
 .modal-inactive {
-  animation: no-blur 300ms forwards;
+  animation: no-blur 700ms forwards ease-out;
 }
 
 @keyframes no-blur {

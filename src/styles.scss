@@ -35,6 +35,10 @@ code {
   color: $main-blue;
 }
 
+.dialog-backdrop {
+  background-color: rgba(40,44,52,.5);
+}
+
 /* b612-regular - latin */
 @font-face {
   font-family: 'B612';
