@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -7,11 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() blur!: boolean;
-
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
 }

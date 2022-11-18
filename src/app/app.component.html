@@ -1,3 +1,5 @@
-<app-header [blur]="blur"></app-header>
-<app-display [blur]="blur"></app-display>
-<app-form (blur)="toggleBlur($event)"></app-form>
+<div class="app-wrapper" [ngClass]="blur ? 'modal-active' : 'modal-inactive'">
+  <app-header></app-header>
+  <app-display></app-display>
+  <app-form (blur)="toggleBlur($event)"></app-form>
+</div>

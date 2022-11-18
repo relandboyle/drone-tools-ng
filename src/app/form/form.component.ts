@@ -126,14 +126,12 @@ export class FormComponent implements OnInit {
     }
     else if (dialogMessage !== '') {
       this.blurEmitter(true);
-      console.log(this.blur)
       this.openDialog(dialogMessage);
     }
 
   }
 
   blurEmitter(value: boolean) {
-    console.log(value);
     this.formBlur = value;
     this.blur.emit(value);
   }
@@ -143,7 +141,8 @@ export class FormComponent implements OnInit {
     let dialogMessage = '';
 
     if (this.inputForm.controls['location'].value === '') {
-      dialogMessage = 'Please enter a city or postal code!'
+      dialogMessage = 'Please enter a city or postal code!';
+      this.blurEmitter(true);
       this.openDialog(dialogMessage);
     }
     else {
@@ -159,7 +158,7 @@ export class FormComponent implements OnInit {
     dialogConfig = {
       ...dialogConfig,
       autoFocus: true,
-      panelClass: 'dialog-panel',
+      backdropClass: 'dialog-backdrop',
       data: {
         id: 'input-error',
         title: dialogMessage,
@@ -168,10 +167,15 @@ export class FormComponent implements OnInit {
       delayFocusTrap: true,
       disableClose: true,
       id: 'input-error',
+      panelClass: 'dialog-panel',
       width: '40%',
     }
 
-    this.dialog.open(DialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe({
+      next: () => this.blurEmitter(false)
+    });
   }
 
 }

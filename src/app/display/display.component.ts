@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { WeatherService } from '../services/weather.service';
 import { MachValues, TipSpeeds, WeatherData, DisplayValues } from '../../constants/interfaces';
 import { CalculationsService } from '../services/calculations.service';
@@ -32,7 +32,6 @@ export class DisplayComponent implements OnInit {
   unitsDisplay = { f: 'f', c: 'c', fps: 'ft/sec', mps: 'm/sec', mb: 'mb', hg: '\"Hg' };
   weather!: WeatherData;
 
-  @Input() blur!: boolean;
   public temp_c = new Subject<number>();
 
 
