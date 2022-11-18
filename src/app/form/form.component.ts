@@ -61,7 +61,6 @@ export class FormComponent implements OnInit {
     const units = form.controls['units'];
     this.units.next(form.value.units);
 
-
     diameterImperial.valueChanges.subscribe(input => {
       if (form.value.units === 'imperial' && diameterMetric.pristine) {
         form.patchValue({
@@ -69,7 +68,6 @@ export class FormComponent implements OnInit {
         }, noEmit);
       }
     });
-
 
     diameterMetric.valueChanges.subscribe(input => {
       if (form.value.units === 'metric' && diameterImperial.pristine) {
@@ -79,7 +77,6 @@ export class FormComponent implements OnInit {
       }
     });
 
-
     airspeedKnots.valueChanges.subscribe(input => {
       if (form.value.units === 'imperial' && airspeedKph.pristine) {
         form.patchValue({
@@ -88,7 +85,6 @@ export class FormComponent implements OnInit {
       }
     });
 
-
     airspeedKph.valueChanges.subscribe(input => {
       if (form.value.units === 'metric' && airspeedKnots.pristine) {
         form.patchValue({
@@ -96,7 +92,6 @@ export class FormComponent implements OnInit {
         }, noEmit);
       }
     });
-
 
     units.valueChanges.subscribe(change => {
       this.wxService.getUnits(change);

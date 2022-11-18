@@ -1,23 +1,27 @@
 @import '../../scss-variables';
 
-h1 {
+:host {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
+p {
   text-align: center;
+  font-size: 1.5rem;
 }
 
 button {
   height: 50px;
   width: 50%;
   font-weight: bold;
-  font-family: "Exo", sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   color: $main-magenta;
   background-color: $main-gray;
   border: solid 2px $faded-magenta;
   border-radius: 5px;
   margin: 15px 0px 15px;
   transition: ease-in-out 300ms;
-  user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
   cursor: pointer;
 
   &:hover {
@@ -26,9 +30,4 @@ button {
     border-color: $main-magenta;
     filter: $magenta-drop-shadow;
   }
-}
-
-p {
-  text-align: center;
-  font-size: 2.5rem;
 }
