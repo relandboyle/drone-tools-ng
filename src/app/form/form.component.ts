@@ -114,38 +114,51 @@ export class FormComponent implements OnInit {
 
 
   submitValues(): void {
-    console.log(this.inputForm.controls)
+    let dialogMessage = '';
 
-    if (
-      !this.inputForm.controls['propDiameterIn'].value
-      || !this.inputForm.controls['battVoltage'].value
-      || !this.inputForm.controls['motorVoltage'].value
-    ) {
-      console.log('OPEN DIALOG')
-      this.openDialog();
+    if (!this.inputForm.controls['propDiameterIn'].value) {
+      dialogMessage = 'Please enter propeller diameter!';
     }
-    else {
+    else if (!this.inputForm.controls['battVoltage'].value) {
+      dialogMessage = 'Please enter battery voltage!';
+    }
+    else if (!this.inputForm.controls['motorVoltage'].value) {
+      dialogMessage = 'Please enter motor power rating!';
+    }
+
+    if (dialogMessage === '') {
       this.calcsService.calculatePropTipSpeed(this.inputForm);
+    }
+    else if (dialogMessage !== '') {
+      this.openDialog(dialogMessage);
     }
   }
 
 
   sendLocation(): void {
-    this.wxService.getWeather(this.inputForm.value.location);
-    this.calcsService.calculateLocalMach1(this.inputForm.value.altitude);
+    let dialogMessage = '';
+
+    if (this.inputForm.controls['location'].value === '') {
+      dialogMessage = 'Please enter a city or postal code!'
+      this.openDialog(dialogMessage);
+    }
+    else {
+      this.wxService.getWeather(this.inputForm.value.location);
+      this.calcsService.calculateLocalMach1(this.inputForm.value.altitude);
+    }
   }
 
 
-  openDialog() {
+  openDialog(dialogMessage: string) {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = {
       id: 'input-error',
-      title: this.dialogTitle
+      title: 'User Input Error',
+      message: dialogMessage
     }
-
 
     this.dialog.open(DialogComponent, dialogConfig);
   }
