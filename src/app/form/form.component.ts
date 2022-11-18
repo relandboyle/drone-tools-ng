@@ -128,12 +128,6 @@ export class FormComponent implements OnInit {
       this.blurEmitter(true);
       this.openDialog(dialogMessage);
     }
-
-  }
-
-  blurEmitter(value: boolean) {
-    this.formBlur = value;
-    this.blur.emit(value);
   }
 
 
@@ -176,6 +170,12 @@ export class FormComponent implements OnInit {
     dialogRef.afterClosed().subscribe({
       next: () => this.blurEmitter(false)
     });
+  }
+
+
+  blurEmitter(value: boolean) {
+    this.formBlur = value;
+    this.blur.emit(value);
   }
 
 }
