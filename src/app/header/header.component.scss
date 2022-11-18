@@ -59,27 +59,26 @@
   to {
     transform: rotate(360deg);
   }
-
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .app-logo {
     animation: App-logo-spin infinite 4s linear;
   }
-
 }
 
 @media screen and (max-width: 540px) {
   .app-logo {
     height: 15vmin;
   }
-
   .header-wrapper {
     max-width: 95vw;
   }
-
   .header > a {
     font-size: 1.15em;
   }
+}
 
+.modal-blur {
+  filter: blur(4px);
 }

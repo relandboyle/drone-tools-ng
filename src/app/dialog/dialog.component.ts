@@ -1,4 +1,4 @@
-import { Component, Inject, InjectionToken } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialogConfig, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({

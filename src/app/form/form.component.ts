@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { CalculationsService } from '../services/calculations.service';
 import { WeatherService } from '../services/weather.service';
@@ -14,11 +14,11 @@ import { Subject } from 'rxjs';
 })
 export class FormComponent implements OnInit {
 
-  dialogTitle: string = 'Testing Dialog Title';
   inputForm!: FormGroup;
   location: string = '';
-  blur!: boolean;
+  formBlur: boolean = false;
 
+  @Output() blur = new EventEmitter<boolean>(false);
   public units = new Subject<string>();
 
 
@@ -113,7 +113,8 @@ export class FormComponent implements OnInit {
   }
 
 
-  submitValues(): void {
+  submitValues(formBlur: boolean): void {
+    console.log(formBlur, this.formBlur);
     let dialogMessage = '';
 
     if (!this.inputForm.controls['propDiameterIn'].value) {
@@ -131,7 +132,10 @@ export class FormComponent implements OnInit {
     }
     else if (dialogMessage !== '') {
       this.openDialog(dialogMessage);
+      this.blur.emit(this.formBlur);
     }
+    console.log(formBlur, this.formBlur);
+
   }
 
 
@@ -150,7 +154,7 @@ export class FormComponent implements OnInit {
 
 
   openDialog(dialogMessage: string) {
-    
+
     let dialogConfig = new MatDialogConfig();
 
     dialogConfig = {
