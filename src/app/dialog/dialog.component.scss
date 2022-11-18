@@ -1,15 +1,15 @@
 @import '../../scss-variables';
 
 
-.modal-overlay {
-  position: fixed;
-  height: 100vh;
-  width: 100vw;
-  background-color: rgba(40, 44, 52, 0.5);
-  z-index: 1;
-}
+// .modal-overlay {
+//   position: fixed;
+//   height: 100vh;
+//   width: 100vw;
+//   background-color: rgba(40, 44, 52, 0.5);
+//   z-index: 1;
+// }
 
-.modal-window {
+:host {
   position: fixed;
   overflow: hidden;
   display: flex;
@@ -30,41 +30,120 @@
   -webkit-user-select: none;
 }
 
-.modal-window > button {
-  margin-top: 10%;
+button {
+  height: 50px;
+  width: 100px;
   font-weight: bold;
-  border-color: $main-magenta;
+  color: $main-magenta;
+  background-color: $main-gray;
+  border: solid 2px $faded-magenta;
+  border-radius: 5px;
+  margin: 15px 0px 15px;
+  transition: ease-in-out 300ms;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
 }
 
-@media screen and(max-width: 540px) {
+// .modal-window > button {
+//   margin-top: 10%;
+//   font-weight: bold;
+//   border-color: $main-magenta;
+// }
+
+// @media screen and(max-width: 540px) {
+//   button {
+//     height: 3em;
+//     cursor: default;
+//   }
+// }
+
+@media screen and (min-width: 540px) {
+  button:hover {
+    color: $main-gray;
+    background-color: $main-magenta;
+    border-color: $main-magenta;
+    filter: $magenta-drop-shadow;
+  }
+
+  .input-form {
+    animation: slideInInputForm 1200ms ease-in-out forwards;
+  }
+
+  .unitsLabel {
+    cursor: pointer;
+  }
+
+  .unitsLabel:hover, [type=number]:hover, [type=text]:hover {
+    border-color: $main-magenta;
+  }
+
+  .units:hover, .options:hover {
+    background-color: $deep-blue;
+  }
+
+  @keyframes slideInInputForm {
+    0% {
+      transform: translateX(100vw);
+    }
+    100% {
+      transform: translateX(0vw);
+    }
+  }
+}
+
+@media screen and (max-width: 540px) {
   button {
-    height: 3em;
+    height: 30%;
     cursor: default;
   }
-}
 
-.fade-in {
-  animation: appear 300ms ease-in-out forwards;
-}
-
-@keyframes appear {
-  from {
-    opacity: 0;
+  .unitsLabel {
+    cursor: default;
   }
-  to {
-    opacity: 1;
-  }
-}
 
-.fade-out {
-  animation: disappear 300ms ease-in-out forwards;
-}
-
-@keyframes disappear {
-  from {
-    opacity: 1;
+  .input-form {
+    max-width: 95vw;
   }
-  to {
-    opacity: 0;
+
+  .button {
+    height: 60px;
+    font-size: 1em;
+  }
+
+  .form {
+    font-size: 1.5em;
+  }
+
+  [type=number], [type=text] {
+    height: 1.2em;
+    width: 40%;
   }
 }
+
+// .fade-in {
+//   animation: appear 300ms ease-in-out forwards;
+// }
+
+// @keyframes appear {
+//   from {
+//     opacity: 0;
+//   }
+//   to {
+//     opacity: 1;
+//   }
+// }
+
+// .fade-out {
+//   animation: disappear 300ms ease-in-out forwards;
+// }
+
+// @keyframes disappear {
+//   from {
+//     opacity: 1;
+//   }
+//   to {
+//     opacity: 0;
+//   }
+// }
