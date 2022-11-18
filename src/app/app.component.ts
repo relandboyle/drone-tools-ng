@@ -7,5 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'drone-tools-ng';
-  blur: boolean = false;
+  blur!: boolean;
+
+  toggleBlur(blur: boolean) {
+    this.blur = blur;
+  }
 }

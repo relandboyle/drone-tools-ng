@@ -1,5 +1,5 @@
 
-<div class="input-form" [ngClass]="blur ? 'modal-active' : 'init'">
+<div class="input-form" [ngClass]="formBlur ? 'modal-active' : 'init'">
 
   <form [formGroup]="inputForm" class='form'>
 
@@ -70,7 +70,7 @@
 
       <button
         class='button'
-        (click)="submitValues()"
+        (click)="submitValues(!formBlur)"
         >PROP TIP SPEED
       </button>
     </div>
