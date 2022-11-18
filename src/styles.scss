@@ -27,3 +27,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.dialog-panel .mat-dialog-container {
+  border: solid 2px $main-magenta;
+  background-color: $main-gray;
+  color: $main-blue;
+}

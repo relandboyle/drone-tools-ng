@@ -1,5 +1,5 @@
 import { Component, Inject, InjectionToken } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogConfig, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dialog',
@@ -11,10 +11,10 @@ export class DialogComponent {
   data: any;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) data: InjectionToken<any>
+    @Inject(MAT_DIALOG_DATA) data: MatDialogConfig
   ) {
+
     this.data = data;
-    console.log(this.data);
   }
 
 }
