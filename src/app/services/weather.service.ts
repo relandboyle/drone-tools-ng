@@ -52,17 +52,15 @@ export class WeatherService {
         const stage1 = Object.entries(wx).map(entry => entry[1]);
         const stage2 = { ...stage1[0], ...stage1[1], text: stage1[1].condition.text };
         delete stage2.condition;
-        
+
         this.weatherKeys.forEach((key: string) => {
           this.weatherData[key] = stage2[key]
         });
 
         this.temp_c.next(stage2.temp_c);
         this.weather.next(this.weatherData);
-        // console.log(this.weatherData)
       },
       error: err => console.error('Error fetching weather:', err),
-      complete: () => console.log('Fetch weather complete')
     });
   }
 

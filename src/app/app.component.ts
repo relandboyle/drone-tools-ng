@@ -10,6 +10,7 @@ export class AppComponent {
   blur!: boolean;
 
   toggleBlur(blur: boolean) {
+    console.log(blur)
     this.blur = blur;
   }
 }
