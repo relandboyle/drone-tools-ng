@@ -6,6 +6,7 @@
 > Note: This is the Angular version of Drone Tools.
 
 <br>
+
 - Estimate propeller tip speed!
 - Optimize settings to achieve maximum performance!
 - Factor in current air temperature at target altitude!
