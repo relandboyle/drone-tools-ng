@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { CalculationsService } from '../services/calculations.service';
 import { WeatherService } from '../services/weather.service';
@@ -17,7 +17,7 @@ export class FormComponent implements OnInit {
   dialogTitle: string = 'Testing Dialog Title';
   inputForm!: FormGroup;
   location: string = '';
-  @Input() blur!: boolean;
+  blur!: boolean;
 
   public units = new Subject<string>();
 
@@ -150,14 +150,22 @@ export class FormComponent implements OnInit {
 
 
   openDialog(dialogMessage: string) {
-    const dialogConfig = new MatDialogConfig();
+    
+    let dialogConfig = new MatDialogConfig();
 
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.data = {
+    dialogConfig = {
+      ...dialogConfig,
+      autoFocus: true,
+      panelClass: 'dialog-panel',
+      data: {
+        id: 'input-error',
+        title: dialogMessage,
+        message: dialogMessage
+      },
+      delayFocusTrap: true,
+      disableClose: true,
       id: 'input-error',
-      title: 'User Input Error',
-      message: dialogMessage
+      width: '40%',
     }
 
     this.dialog.open(DialogComponent, dialogConfig);
