@@ -25,7 +25,7 @@ export class DisplayComponent implements OnInit {
     temperatureImperial: null,
     temperatureMetric: null,
   };
-  propTipSpeeds!: TipSpeeds;
+  propTipSpeeds: TipSpeeds = { feetPerSecond: 0, metersPerSecond: 0 };
   machNumber!: number;
   machValues!: MachValues;
   units: string = 'imperial';
@@ -66,6 +66,7 @@ export class DisplayComponent implements OnInit {
           this.machNumber = this.calculateMachNumber();
           this.displayStrings.machNumber = `Mach: ${this.machNumber}`;
         }
+
       },
       error: err => console.error(err)
     });

@@ -16,9 +16,9 @@ export class FormComponent implements OnInit {
 
   inputForm!: FormGroup;
   location: string = '';
-  formBlur: boolean = false;
+  formBlur: boolean = false
 
-  @Output() blur = new EventEmitter<boolean>(false);
+  @Output() blur = new EventEmitter<boolean>();
   public units = new Subject<string>();
 
 
@@ -108,8 +108,7 @@ export class FormComponent implements OnInit {
   }
 
 
-  submitValues(formBlur: boolean): void {
-    console.log(formBlur, this.formBlur);
+  submitValues(): void {
     let dialogMessage = '';
 
     if (!this.inputForm.controls['propDiameterIn'].value) {
@@ -126,11 +125,17 @@ export class FormComponent implements OnInit {
       this.calcsService.calculatePropTipSpeed(this.inputForm);
     }
     else if (dialogMessage !== '') {
+      this.blurEmitter(true);
+      console.log(this.blur)
       this.openDialog(dialogMessage);
-      this.blur.emit(this.formBlur);
     }
-    console.log(formBlur, this.formBlur);
 
+  }
+
+  blurEmitter(value: boolean) {
+    console.log(value);
+    this.formBlur = value;
+    this.blur.emit(value);
   }
 
 
@@ -149,7 +154,6 @@ export class FormComponent implements OnInit {
 
 
   openDialog(dialogMessage: string) {
-
     let dialogConfig = new MatDialogConfig();
 
     dialogConfig = {
@@ -168,10 +172,6 @@ export class FormComponent implements OnInit {
     }
 
     this.dialog.open(DialogComponent, dialogConfig);
-  }
-
-  test() {
-    console.log('TEST BUTTON')
   }
 
 }

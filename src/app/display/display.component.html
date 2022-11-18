@@ -1,4 +1,4 @@
-<div class="outputs" [ngClass]="!blur ? 'modal-active' : 'init'">
+<div class="outputs" [ngClass]="blur ? 'modal-active' : 'init'">
 
   <!-- display current local weather info if data has been fetched from the weather API -->
   <div class='weather'>
@@ -24,7 +24,7 @@
 
   <!-- display imperial or metric calculated tip speed value based on current state of 'displayValues.units' -->
   <div class='output-value'>
-    <span *ngIf="weather && propTipSpeeds; else machNum">{{ displayStrings.machNumber }}</span>
+    <span *ngIf="machNumber; else machNum">{{ displayStrings.machNumber }}</span>
     <ng-template #machNum>Mach #</ng-template>
   </div>
 
@@ -33,10 +33,10 @@
     if local mach 1 has not been calculated but tip speed has been calculated, display tip speed and 'enter location for local mach 1'
   -->
   <div class='local-mach-1'>
-    <p *ngIf="propTipSpeeds || weather">
+    <p *ngIf="propTipSpeeds.feetPerSecond || weather">
       <span *ngIf="units === 'imperial'; else metricRates">
-        {{ (propTipSpeeds.feetPerSecond > 0.1) ? displayStrings.tipSpeedImperial : displayStrings.enterSpecs }} |
-        {{ (weather) ? displayStrings.localMach1Imperial : displayStrings.enterLocation }}
+        {{ propTipSpeeds.feetPerSecond ? displayStrings.tipSpeedImperial : displayStrings.enterSpecs }} |
+        {{ weather ? displayStrings.localMach1Imperial : displayStrings.enterLocation }}
       </span>
       <ng-template #metricRates>
         <span>
