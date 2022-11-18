@@ -31,6 +31,7 @@ code {
 
 .dialog-panel .mat-dialog-container {
   border: solid 2px $main-magenta;
+  border-radius: 10px;
   background-color: $main-gray;
   color: $main-blue;
 }
